@@ -1,0 +1,60 @@
+<template>
+  <v-footer
+    class=" text-center d-flex flex-column" color="senary" elevation="2" app
+  >
+    <div>
+      <v-btn
+        v-for="icon in icons"
+        :key="icon"
+        class="mx-0"
+        :icon="icon.name"
+        variant="text"
+        color="white"
+        @click="redirectTo(icon.to)"
+      ></v-btn>
+    </div>
+
+    <div class="pt-1 sur">
+      Sur Ilustra
+    </div>
+
+    <v-divider></v-divider>
+
+    <div class="footer-family">
+      <!-- {{ new Date().getFullYear() }} -->Desarrollado por ® Agencia Relieve  | Todos los derechos reservados
+    </div>
+  </v-footer>
+</template>
+
+<script setup>
+
+
+const icons = [
+  {
+    name: 'mdi-facebook',
+    to: 'https://www.facebook.com/gerardo.o.montecinos',
+    
+  },
+  {
+    name: 'mdi-instagram',
+    to: 'https://www.instagram.com/enmarcaysen/',
+
+  },
+         
+]
+
+const redirectTo = (url) =>{
+window.open(url, '_blank')
+}
+</script>
+
+<style scoped>
+
+.footer-family{
+  font-family: 'Courier New';
+  font-size: 0.80rem;
+}
+.sur{
+  font-family: 'Homemade Apple', cursive;
+}
+</style>
