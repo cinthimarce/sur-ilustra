@@ -1,8 +1,7 @@
 <template>
-
   <div class="desktop" v-if="isMobile">
     <!-- Color Background Menu Mobile -->
-    
+
     <v-navigation-drawer
       temporary
       location="left"
@@ -11,7 +10,6 @@
       v-model="drawer"
       color="primary"
     >
-    
       <v-layout class="mt-4 d-flex flex-column text-right">
         <div class="d-flex justify-left">
           <v-img
@@ -23,7 +21,7 @@
           </v-img>
         </div>
       </v-layout>
-      
+
       <!-- Hover Menu Mobile -->
       <v-list>
         <v-list-item
@@ -43,59 +41,62 @@
         </v-list-item>
       </v-list>
       <!-- Hover Menu Mobile -->
-
     </v-navigation-drawer>
-    
+
     <!-- NavBar Mobile Toolbar - MdiMenu navicon-->
     <v-toolbar app dark prominent color="senary">
-      
-      <v-app-bar-nav-icon size="60" @click="drawer = !drawer" color="secondary"> 
+      <v-app-bar-nav-icon size="60" @click="drawer = !drawer" color="secondary">
       </v-app-bar-nav-icon>
       <v-spacer></v-spacer>
-      <v-row >
-        <v-img
-            src="../assets/banner/logo2.png"
-            max-height="80"
-            max-width="100"       
-          ></v-img>
-      </v-row>  
-      <!-- <v-app-bar-title>Sur Ilustra</v-app-bar-title> -->
-    </v-toolbar>
-   <!-- NavBar Mobile Toolbar - MdiMenu navicon--> 
-  
-  </div>
-  <!-- NavBar Desktop--> 
-  
-  <div class="desktop" v-if="!isMobile">
-    <v-image image="img/logo2.png" size="80"></v-image>
-    <v-app-bar :elevation="0" color="quinary">
-      <v-row d-flex justify="center" >
+      <v-row>
         <v-img
           src="../assets/banner/logo2.png"
-          max-height="80"
-          max-width="100"
+          max-height="70"
+          max-width="90"
+        ></v-img>
+      </v-row>
+      <!-- <v-app-bar-title>Sur Ilustra</v-app-bar-title> -->
+    </v-toolbar>
+    <!-- NavBar Mobile Toolbar - MdiMenu navicon-->
+  </div>
+  <!-- NavBar Desktop-->
+
+  <div class="desktop" v-if="!isMobile">
+    <v-image image="img/logo.png" size="40"></v-image>
+    <v-app-bar :elevation="0" color="senary" class="">
+      <v-row d-flex justify="center">
+        <v-img
+          src="../assets/banner/logowhite.png"
+          max-height="40"
+          max-width="60"
           pl-10
           contain
         ></v-img>
+        <h3 class="logo-text pt-3">Humberto Vera</h3>
       </v-row>
       <v-row d-flex justify="center">
-      <!-- Selected NavBar Desktop-->   
+        <!-- Selected NavBar Desktop-->
         <v-tabs
           v-model="tab"
-          color="senary"
+          color="primary"
           align-tabs="center"
           hide-slider="false"
           v-for="item in itemsNav"
           :key="item.name"
         >
           <v-tab
-            class="tab-family"
+            class="tab-family pb-4"
             direction="left"
             :to="item.to"
             :value="item.tab"
             >{{ item.name }}</v-tab
           >
         </v-tabs>
+
+        <v-badge :content="cartStore.cardCount" color="primary">
+          <v-btn icon="mdi-cart" to="/cart"></v-btn>
+        </v-badge>
+       
       </v-row>
     </v-app-bar>
   </div>
@@ -103,6 +104,7 @@
  
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
+import { useCartStore } from '../stores/cart';
 const isMobile = ref(window.innerWidth < 500);
 const handleResize = () => {
   isMobile.value = window.innerWidth < 500;
@@ -113,6 +115,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener("resize", handleResize);
 });
+const cartStore = useCartStore();
 const drawer = ref(true);
 const tab = ref(null);
 const itemsNav = [
@@ -132,11 +135,6 @@ const itemsNav = [
     to: "/scult",
   },
   {
-    name: "Tienda",
-    icon: "mdi-cart-outline",
-    to: "/shop",
-  },
-  {
     name: "Sobre",
     icon: "mdi-information-variant",
     to: "/about",
@@ -147,6 +145,7 @@ const itemsNav = [
     to: "/contact",
   },
 ];
+
 </script>
  
 <style scoped>
@@ -156,10 +155,16 @@ const itemsNav = [
   padding-left: 20px;
 }
 .v-tab:hover {
-  color: #8AA49B !important;
-  background-color: #f7f7f7 !important;
+  color: #556560 !important;
+  /* background-color: #f7f7f7 !important; */
 }
 .tab-family {
-  font-family: "Bellefair", serif;
+  /* font-family: "Bellefair", serif; */
+  font-family: "Marcellus", serif;
+}
+.logo-text {
+
+  font-family: "Homemade Apple", cursive;
+  font-size: 1.2rem;
 }
 </style>

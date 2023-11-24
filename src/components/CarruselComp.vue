@@ -1,13 +1,13 @@
 <template>
   <v-carousel hide-delimiters >
     <v-carousel-item     
-      src="../assets/banner/casa3.png"
+      src="../assets/banner/casa1.jpg"
     ></v-carousel-item>
     <v-carousel-item     
-      src="../assets/banner/casa4.png"
+      src="../assets/banner/casa2.jpg"
     ></v-carousel-item>
     <v-carousel-item     
-      src="../assets/banner/casa2.jpg" 
+      src="../assets/banner/casa3.jpg" 
     ></v-carousel-item>
     <v-carousel-item     
       src= "../assets/banner/loi.png"

@@ -11,17 +11,20 @@
         variant="text"
         color="white"
         @click="redirectTo(icon.to)"
-      ></v-btn>
-    </div>
+      >
+      
+    </v-btn>
+    
+  </div>
 
     <div class="pt-1 sur">
-      Sur Ilustra
+      ® Humberto Vera
     </div>
 
     <v-divider></v-divider>
 
-    <div class="footer-family">
-      <!-- {{ new Date().getFullYear() }} -->Desarrollado por ® Agencia Relieve  | Todos los derechos reservados
+    <div class="footer-family" >
+      <!-- {{ new Date().getFullYear() }} -->Desarrollado en <strong></strong> Vue3 por ® Agencia Relieve  
     </div>
   </v-footer>
 </template>

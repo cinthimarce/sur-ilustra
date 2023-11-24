@@ -19,7 +19,9 @@ export default createVuetify(
           septenary: '#315467',
           octonary: '#D9DEE4',
           nonary: '#FFFFFF',
-          denary: '#000000'
+          denary: '#000000',
+          undenary: '#fcb050',
+          duodenary: '#ee4b2c'
         }
       },
     },

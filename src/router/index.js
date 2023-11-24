@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue' 
 import IlustrationView from '../views/IlustrationView.vue'
 import ScultView from '../views/ScultView.vue'
-import TiendaView from '../views/TiendaView.vue'
+import CartView from '../views/CartView.vue'
 import ContactView from '../views/ContactView.vue'
 
 const routes = [
@@ -28,14 +28,14 @@ const routes = [
     component: ScultView
   },
   {
-    path: '/shop',
-    name: 'shop',
-    component: TiendaView
-  },
-  {
     path: '/contact',
     name: 'contact',
     component: ContactView
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: CartView
   },
 
 
