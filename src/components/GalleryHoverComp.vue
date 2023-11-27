@@ -10,13 +10,12 @@
               v-bind="props"
               class="transparent"
             >
-              <v-img :src="item.image" height="400px" cover @click="add(item)">
+              <v-img :src="item.image" height="310px" cover @click="add(item)">
                 <div class="align-self-center">
                   <v-card-title
                     class="text-h6 text-transparent d-flex flex-column align-center"
                     :class="{ 'show-btns': isHovering }"
                     :color="transparent"
-                    
                   >
                   </v-card-title>
                 </div>
@@ -28,14 +27,14 @@
                     style="height: 10%"
                     @click="showCard(item.id)"
                   >
-                    <v-text class="text-overline">Agregar al Carrito</v-text>
+                    <v-text class="text-overline ">Agregar al Carrito</v-text>
                   </div>
                 </v-expand-transition>
               </v-img>
               <v-card-text>
                 <p class="font-weight-light text-septenary text-h6 ma-0">
                   <!-- mt-4 ma-0 text-body-1 font-weight-bold -->
-                  {{ item.text }}
+                  {{ item.title }}
                 </p>
                 <p class="text-caption font-weight-medium text-grey">
                   {{ item.subtext }}
@@ -55,19 +54,27 @@
       >
         <template v-slot:default="{ isActive }">
           <v-card>
-            <v-toolbar
-              color="primary"
-              :title="galleryShowCards.title"
-            ></v-toolbar>
+            
+            <v-toolbar color="septenary" class="pr-2"
+              :title="galleryShowCards.title">
+              
+              <v-spacer></v-spacer>
+              <v-btn icon dark @click="isActive.value = false" >
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+              <v-toolbar-items>
+                
+              
+              </v-toolbar-items>
+            </v-toolbar>
             <v-card-text>
               <!--ingresando el componente showCards-->
               <GalleryDialogComp :ilustraciones="galleryShowCards" />
             </v-card-text>
-            <v-card-actions class="justify-end">
-              <v-btn variant="text" @click="isActive.value = false"
-                >Cerrar</v-btn
+            <v-card-actions class="justify-center">
+              <v-btn class="color-bg-cart px-6 mb-4" variant="text">Agregar al Carrito</v-btn
               >
-            </v-card-actions> 
+            </v-card-actions>
           </v-card>
         </template>
       </v-dialog>
@@ -81,7 +88,6 @@
 import { useCartStore } from "@/stores/cart";
 import { ref } from "vue";
 import GalleryDialogComp from "./GalleryDialogComp.vue";
-
 
 //states
 const transparent = "rgba(255, 255, 255, 0)";
@@ -146,4 +152,10 @@ const showCard = (id) => {
 .text-grey {
   color: #1d1d1d;
 }
+.color-bg-cart{
+  background-color: #E3F26D;
+  color: #315467; 
+  border-bottom: none;  
+}
+
 </style>
