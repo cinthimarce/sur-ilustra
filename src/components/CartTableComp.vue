@@ -16,7 +16,7 @@
                             <td>{{ item.title }}</td>
                             <td>{{ item.count }}</td>
                             <td>{{ item.price.toLocaleString('es-CL') }}</td>
-                            <td>${{ item.total }}</td>
+                            <td>${{ item.total.toLocaleString('es-CL') }}</td>
                             <div class="d-flex justify-space-around align-center mt-4">
                                 <td><v-icon @click="cartStore.addStockCart(item.id)">mdi-plus-circle</v-icon></td>
                                 <td><v-icon @click="removeStock(item.id)">mdi-minus-circle</v-icon></td>

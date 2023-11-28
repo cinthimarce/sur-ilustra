@@ -15,7 +15,7 @@ export const galeria = {
             "text": "Print/Lámina de 21x29cm",
             "subtext": "Ilustración a mano, tinta y acuarela ",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
-            "image": "img/casa7.jpg",
+            "image": "img/casa2.jpg",
             "price": 28000
         },
         {

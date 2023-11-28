@@ -2,7 +2,6 @@
   <MainLayout>
       <template #main>
           <GalleryHoverComp/>
-          
       </template>
   </MainLayout>
 </template>

@@ -6,6 +6,7 @@ import ScultView from '../views/ScultView.vue'
 import CartView from '../views/CartView.vue'
 import ContactView from '../views/ContactView.vue'
 
+
 const routes = [
   {
     path: '/',
@@ -21,6 +22,11 @@ const routes = [
     path: '/ilustration',
     name: 'ilustration',
     component: IlustrationView
+  },
+  {
+    path: '/ilustration/:id',
+    name:'ilustrationDetails',
+    component: () => import('@/views/IlustrationDetails.vue')
   },
   {
     path: '/scult',

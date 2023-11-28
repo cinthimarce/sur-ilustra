@@ -64,6 +64,9 @@ export const useCartStore = defineStore('cart', {
                 }
             })
         },
+        getIlustrationById (id){
+            return this.gallery.ilustrations.find(ilustration => ilustration.id == id)
+          }   
     }
 
 })
