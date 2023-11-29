@@ -4,6 +4,7 @@
       <v-card class="overflow-auto" elevation="0" width="284">
         <v-img class="align-end" :src="ilustraciones.image" cover content>
         </v-img>
+        
       </v-card>
     </v-col>
 
