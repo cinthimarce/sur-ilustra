@@ -94,7 +94,7 @@
             </v-card-text>
             <v-card-actions class="justify-center">
               <v-btn class="color-bg-cart px-6 mb-4" variant="text"
-                >Agregar al Carrito</v-btn
+                >Agregar al Carrito</v-btn 
               >
             </v-card-actions>
           </v-card>
