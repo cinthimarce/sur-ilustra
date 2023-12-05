@@ -1,15 +1,13 @@
-
 <template>
   <!-- 1 -->
   <v-container class="cart">
     <v-row justify="center">
       <v-col align-self="center">
-        <h1 class="titulo">Productos Agregados</h1>
+        <h1 class="titulo">Finalizar Compra</h1>
         <v-table>
           <thead>
             <tr>
               <th class="text-center">
-
               </th>
             </tr>
           </thead>
@@ -26,7 +24,7 @@
               </div>
             </tr>
             <div class="text-center">
-              <v-toolbar-title class="ml-4 mt-4 mb-4" >Total Compras: <span class="text-success">$10.000</span> </v-toolbar-title>
+              <v-toolbar-title class="ml-4 mt-4 mb-4">Total Compras: <span class="text-success">$10.000</span></v-toolbar-title>
             </div>
           </tbody>
         </v-table>

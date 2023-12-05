@@ -2,7 +2,7 @@
     <v-container class="cart">
         <v-row justify="center">
             <v-col align-self="center">
-                <h1 class="titulo">Productos Agregados</h1>
+                <h1 class="titulo pb-8 text-center">Finalizar Compra</h1>
                 <v-table>
                     <thead>
                         <tr>
@@ -87,4 +87,7 @@ const deleteItemConfirm =() => {
 </script>
  
 <style scoped>
+.style-font-title{
+    font-family: '';
+}
 </style>
