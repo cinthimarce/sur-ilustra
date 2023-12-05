@@ -29,7 +29,7 @@
                     </tbody>
                 </v-table>
                 <v-dialog v-model="dialogDelete" max-width="500px">
-                    <v-card color="orange">
+                    <v-card color="primary">
                         <v-card-title class="text-h5 text-center">¿desea eliminar el producto?</v-card-title>
                         <v-card-actions>
                             <v-spacer></v-spacer>
