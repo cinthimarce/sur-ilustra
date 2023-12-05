@@ -37,16 +37,22 @@
       <v-card class="mx-auto" max-width="600" elevation="0">
         <v-card-actions class="justify-space-between">
           <!-- <v-btn variant="plain" icon="mdi-chevron-left" @click="prev"></v-btn> -->
-          <v-img class="" :src="src_image" cover content></v-img>
+          <v-img class="d-flex align-end " :src="src_image" cover content>
+            <div class="d-flex justify-end margin-lupa mb-2 mr-10" >
+              <v-avatar>
+                <v-btn icon="mdi-magnify" variant="plain"></v-btn>
+              </v-avatar>
+            </div>
+          </v-img>
           <v-btn variant="text" icon="mdi-chevron-right" @click="next"></v-btn>
         </v-card-actions>
       </v-card>
       <!-- LUPA-->
-      <div class="d-flex justify-end margin-lupa" >
+      <!-- <div class="d-flex justify-end margin-lupa" >
         <v-avatar>
           <v-btn icon="mdi-magnify" variant="plain"></v-btn>
         </v-avatar>
-      </div>
+      </div> -->
     </v-col>
     <!--...-->
     <v-col cols="auto" order="12" class="">
@@ -140,7 +146,7 @@ onMounted(() => {
   margin-right: 4rem;
 }
 .text-caption-2{
-  font-size: 1rem;
+  font-size: 0.98rem;
 }
 .color-subtitle{
   color: #315467;

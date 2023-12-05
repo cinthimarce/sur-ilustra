@@ -50,10 +50,10 @@
       <v-card class="mx-auto pt-1 px-4" width="250px" elevation="0">
         <v-text-field label="Cantidad" variant="outlined">
           <template v-slot:append>
-            <v-btn color="septeary" icon="mdi-plus" round></v-btn>
+            <v-btn color="septenary" icon="mdi-plus" round></v-btn>
           </template>
           <template v-slot:prepend>
-            <v-btn color="septeary" icon="mdi-minus" round></v-btn>
+            <v-btn color="septenary" icon="mdi-minus" round></v-btn>
           </template>
         </v-text-field>
         <!-- <v-checkbox class="ps-10" label="Con Marco"></v-checkbox> -->
