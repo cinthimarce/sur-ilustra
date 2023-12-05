@@ -82,12 +82,12 @@
         </v-card-title> 
         <!-- COUNT -->
         <v-card class="mx-auto pt-6 px-4 text-center p" width="300" elevation="0">
-          <v-text-field class="text-center-cantidad" label="Cantidad" variant="outlined">
+          <v-text-field class="text-center-cantidad"  variant="outlined" :label="count">
             <template v-slot:append>
-              <v-btn color="septenary" icon="mdi-plus" round></v-btn>
+              <v-btn @click="incrementProduct" color="septenary" icon="mdi-plus" round></v-btn>
             </template>
             <template v-slot:prepend>
-              <v-btn color="septenary" icon="mdi-minus" round></v-btn>
+              <v-btn @click="decrementProduct" color="septenary" icon="mdi-minus" round></v-btn>
             </template>
           </v-text-field>
         </v-card>
@@ -97,6 +97,7 @@
             class="color-bg-cart px-6 mb-4"
             variant="text"
             color="septenary"
+            @click="addProduct(ilustration)"
             >Agregar al Carrito</v-btn>
         </v-card-actions>
       </v-card>
@@ -116,6 +117,26 @@ const cartStore = useCartStore();
 const ilustrationId = ref(route.params.id);
 const ilustration = ref([]);
 const src_image = ref(null);
+const count = ref(0)
+
+const incrementProduct = () => count.value++
+const decrementProduct = () => (count.value > 0 ? count.value--: null)
+
+const addProduct = (item) =>{
+  if(count.value > 0){
+    let product = {
+    id: item.id,
+    title: item.title,
+    image: item.image,
+    price: item.price,
+    count: count.value
+  }
+  cartStore.addProductCart(product)
+  count.value = 0
+  }else{
+    alert("agregue un producto")
+  }
+}
 
 onMounted(() => {
   ilustration.value = cartStore.getIlustrationById(ilustrationId.value);
