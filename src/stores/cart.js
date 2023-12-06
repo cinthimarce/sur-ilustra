@@ -15,8 +15,11 @@ export const useCartStore = defineStore('cart', {
                 return myProd
             })
         },
-        cardCount(state) {
+        cartCount(state) {
             return state.cart.length
+        },
+        cartTotalProducts(state){
+            return state.cart.reduce((total, prod) => total + prod.count,0)
         },
         galleryProducts(state) {
             return state.gallery

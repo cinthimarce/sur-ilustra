@@ -93,7 +93,7 @@
           >
         </v-tabs>
 
-        <v-badge :content="cartStore.cardCount" color="primary">
+        <v-badge :content="cartStore.cartTotalProducts" color="primary">
           <v-btn icon="mdi-cart" to="/cart"></v-btn>
         </v-badge>
        
