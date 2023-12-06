@@ -63,14 +63,20 @@
             <div>{{ ilustration.description }}</div>
           </v-card-text>
           <v-card-title class="text-h4 font-weight-medium pt-2 pb-1">
-            <div class="color-picture">$28.000<!-- {{ ilustration.price }} --></div>
+            <div class="color-picture">
+              <h4 v-if="checkboxEnmarcado == false">{{ formatCurrency(ilustration.price)  }}</h4>
+              <h4 v-else>{{ formatCurrency(ilustration.priceMarco) }}</h4>
+            </div>
+            
             <div class="ps-1 color-title text-overline text-big font-weight-bold pb-1 pt-3">Enmarcado</div>
+            
             <v-btn variant="outlined" class="mr-2 ">
               $ 38.500
             </v-btn>
-            <v-btn variant="outlined">
-              SIN MARCO
-            </v-btn>
+            <v-checkbox
+              v-model="checkboxEnmarcado"
+              label="agregar enmarcado"
+            ></v-checkbox>
             <!-- <div>
                 <v-checkbox
                   class="ps-1 color-title text-overline"
@@ -130,24 +136,34 @@ const snackbar = ref(false)
 const timeout = 2500
 const text = 'Producto agregado al carrito con exito'
 
+// checkboxEnmarcado
+const checkboxEnmarcado = ref(false)
+
 const incrementProduct = () => count.value++
 const decrementProduct = () => (count.value > 0 ? count.value-- : null)
 
 const addProduct = (item) => {
   if (count.value > 0) {
-    let product = {
+    let product ={
       id: item.id,
       title: item.title,
       image: item.image,
-      price: item.price,
-      count: count.value
+      count: count.value,
+      withMarco: checkboxEnmarcado.value,
+      price: checkboxEnmarcado.value ? item.priceMarco : item.price
     }
-    cartStore.addProductCart(product)
-    count.value = 0
-    snackbar.value = true
-  } else {
-    alert("agregue un producto")
+    cartStore.addProductCart(product);
+    count.value = 0;
+    snackbar.value = true;
   }
+}
+
+// funcion que formatea los precios a moneda chilena 
+const formatCurrency = (value) =>{
+  return new Intl.NumberFormat('es-CL',{
+    style: 'currency',
+    currency: 'CLP',
+  }).format(value)
 }
 
 onMounted(() => {

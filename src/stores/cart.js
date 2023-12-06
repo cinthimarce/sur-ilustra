@@ -34,17 +34,28 @@ export const useCartStore = defineStore('cart', {
         initializeGallery() {
             this.gallery = galeria;
         },
-        addProductCart(product) {
-            const exist = this.cart.some(prod => prod.id == product.id);
-            if (!exist) {
-                this.cart.push(product);
-            } else {
-                this.cart.forEach(prod => {
-                    if (prod.id == product.id) {
-                        prod.count += 1
-                    }
-                })
+        // addProductCart(product) {
+        //     const exist = this.cart.some(prod => prod.id == product.id);
+        //     if (!exist) {
+        //         this.cart.push(product);
+        //     } else {
+        //         this.cart.forEach(prod => {
+        //             if (prod.id == product.id) {
+        //                 prod.count += 1
+        //             }
+        //         })
 
+        //     }
+        // },
+        addProductCart(product){
+            //agregar una propiedad "withMarco" que refleja si el usuario quiere el producto con marco o no
+            const existingProductIndex = this.cart.findIndex((prod) =>{
+                prod.id === prod.id && prod.withMarco === product.withMarco
+            });
+            if (existingProductIndex !== -1){
+                this.cart[existingProductIndex].count += product.count;
+            }else{
+                this.cart.push({...product})
             }
         },
         removeProductCart(idProduct) {

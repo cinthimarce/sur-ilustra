@@ -52,7 +52,7 @@
               <v-sheet class="d-flex mb-6 pt-6">
                 <v-sheet
                   class="pl-5 me-auto text-h5 font-weight-medium text-septenary"
-                  >${{ item.price }}</v-sheet
+                  >{{ formatCurrency(item.price) }}</v-sheet
                 >
                 <v-sheet class="pr-5"
                   ><v-btn
@@ -119,6 +119,13 @@ const dialog = ref(false);
 const galleryShowCards = ref([]);
 const ilustrations = cartStore.galleryProducts.ilustrations;
 const route = useRouter();
+
+const formatCurrency = (value) =>{
+  return new Intl.NumberFormat('es-CL',{
+    style: 'currency',
+    currency: 'CLP',
+  }).format(value)
+}
 
 //functions
 // function add(item) {

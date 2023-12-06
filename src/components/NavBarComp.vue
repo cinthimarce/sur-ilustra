@@ -80,7 +80,7 @@
           v-model="tab"
           color="primary"
           align-tabs="center"
-          hide-slider="false"
+          hide-slider=false
           v-for="item in itemsNav"
           :key="item.name"
         >

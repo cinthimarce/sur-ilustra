@@ -7,7 +7,8 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela ",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa1.jpg",
-            "price": 28000
+            "price": 28000,
+            "priceMarco": 38500
         },
         {
             "id": 2,
@@ -16,7 +17,8 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela ",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa2.jpg",
-            "price": 28000
+            "price": 28000,
+            "priceMarco": 38500
         },
         {
             "id": 3,
@@ -25,7 +27,8 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa3.jpg",
-            "price": 28000
+            "price": 28000,
+            "priceMarco": 38500
         },
         {
             "id": 4,
@@ -34,7 +37,8 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa4.jpg",
-            "price": 28000
+            "price": 28000,
+            "priceMarco": 38500
         },
         {
             "id": 5,
@@ -43,7 +47,8 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa5.jpg",
-            "price": 28000
+            "price": 28000,
+            "priceMarco": 38500
         },
         {
             "id": 6,
@@ -52,7 +57,8 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa6.jpg",
-            "price": 28000
+            "price": 28000,
+            "priceMarco": 38500
         },
     ],
     "esculturas": [
