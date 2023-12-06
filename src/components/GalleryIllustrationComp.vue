@@ -125,11 +125,10 @@
               @click="addProduct(ilustration)">Agregar al Carrito</v-btn>
           </v-card-actions>
           <div class="text-center">
-            <v-snackbar v-model="snackbar" :timeout="timeout" color="primary" class="text-center">
+            <v-snackbar v-model="snackbar" :timeout="timeout" color="primary">
               {{ text }}
               <template v-slot:actions>
                 <v-btn color="blue" variant="text" @click="snackbar = false" icon="mdi-close">
-                  
                 </v-btn>
               </template>
             </v-snackbar>
@@ -155,7 +154,7 @@ const count = ref(0)
 
 //snackbar
 const snackbar = ref(false)
-const timeout = 2500
+const timeout = 3500
 const text = 'Producto agregado al carrito con éxito'
 
 const incrementProduct = () => count.value++
