@@ -2,7 +2,7 @@
     <v-container class="cart">
         <v-row justify="center">
             <v-col align-self="center">
-                <h1 class="titulo pb-8 text-center">Finalizar Compra</h1>
+                <h1 class="pb-8 text-center">Finalizar Compra</h1>
                 <v-table>
                     <thead>
                         <tr>
@@ -16,6 +16,7 @@
                             <td>{{ item.title }}</td>
                             <td>{{ item.count }}</td>
                             <td>{{ item.price.toLocaleString('es-CL') }}</td>
+                            <td>{{ displayWithMarco(item.withMarco) }}</td>
                             <td>${{ item.total.toLocaleString('es-CL') }}</td>
                             <div class="d-flex justify-space-around align-center mt-4">
                                 <td><v-icon @click="cartStore.addStockCart(item.id)">mdi-plus-circle</v-icon></td>
@@ -55,17 +56,20 @@ const deleteId = ref(null)
  
 const cartStore = useCartStore()
 const listStore = computed(() => cartStore.getCartList)
+// si tiene enmarcado
+const displayWithMarco = (withMarco) => {
+  return withMarco ? 'Si' : 'No';
+};
  
 const headers= [
     { text: 'Producto', value: 'name' },
     { text: 'Cantidad', value: 'count' },
     { text: 'Precio', value: 'price' },
+    { text: 'Enmarcado', value: 'withMarco'},
     { text: 'Subtotal', value: 'total' },
     { text: 'Acciones', value: 'actions' }
  
 ]
- 
- 
 function removeStock(item){
             cartStore.removeStockCart(item)
         }

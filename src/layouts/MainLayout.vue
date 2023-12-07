@@ -22,9 +22,9 @@ import FooterComp from '@/components/FooterComp.vue'
 
 <style scoped>
 .slot{
-        padding-top:100px;
-        padding-bottom: 10rem;
-        width: 100%;
-        
+    padding-top:100px;
+    padding-bottom: 10rem;
+    width: 100%;
+
     }
 </style>
