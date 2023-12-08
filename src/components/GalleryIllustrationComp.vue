@@ -29,7 +29,7 @@
         </v-card>
       </v-col>
       <!--...-->
-      <v-col cols="auto" order="12" class="">
+      <v-col cols="auto" order="12">
         <v-card class="mx-auto pt-1 px-4 " width="300" elevation="0">
           <!-- DESCRIPTION PRODUCT -->
           <v-card-title class="color-title  pb-2 font-bold">{{
@@ -68,16 +68,6 @@
               </v-btn>
             </v-btn-toggle>
 
-            <!-- <v-checkbox
-              v-model="checkboxEnmarcado"
-              label="agregar enmarcado"
-            ></v-checkbox> -->
-            <!-- <div>
-                <v-checkbox
-                  class="ps-1 color-title text-overline"
-                  label="$38.500 Enmarcado"
-                ></v-checkbox>
-              </div> -->
           </v-card-title>
           <!-- COUNT -->
           <GalleryCounter :count="count" @add="incrementProduct" @remove="decrementProduct" />
