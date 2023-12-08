@@ -31,7 +31,7 @@
                     class="d-flex transition-fast-in-fast-out color-primary v-card--reveal text-h9"
                     :class="{ isHovering }"
                     style="height: 10%"
-                    @click="showCard(item.id)"
+                    
                   >
                     <v-text class="text-overline">Ver Detalle</v-text>
                   </v-btn>
@@ -68,7 +68,7 @@
       </template>
     </v-row>
     <!--Modal-->
-    <div>
+    <!-- <div>
       <v-dialog
         transition="dialog-bottom-transition"
         width="auto"
@@ -88,7 +88,7 @@
               <v-toolbar-items> </v-toolbar-items>
             </v-toolbar>
             <v-card-text>
-              <!--ingresando el componente showCards-->
+              
               <GalleryDialogComp :ilustraciones="galleryShowCards" />
             </v-card-text>
             <v-card-actions class="justify-center">
@@ -99,7 +99,7 @@
           </v-card>
         </template>
       </v-dialog>
-    </div>
+    </div> -->
   </v-container>
 </template>
  
@@ -107,15 +107,15 @@
 //import { defineProps } from "vue";
 //const propsImg = defineProps(["galleryData"]);
 import { useCartStore } from "@/stores/cart";
-import { ref } from "vue";
-import GalleryDialogComp from "./GalleryDialogComp.vue";
+//import { ref } from "vue";
+//import GalleryDialogComp from "./GalleryDialogComp.vue";
 import { useRouter } from "vue-router";
 
 //states
 const transparent = "rgba(255, 255, 255, 0)";
 const cartStore = useCartStore();
-const dialog = ref(false);
-const galleryShowCards = ref([]);
+//const dialog = ref(false);
+//const galleryShowCards = ref([]);
 const ilustrations = cartStore.galleryProducts.ilustrations;
 const route = useRouter();
 
@@ -146,12 +146,12 @@ const redirectTo = (id) => {
   route.push(`/ilustration/${id}`);
 };
 
-const showCard = (id) => {
+/* const showCard = (id) => {
   dialog.value = true;
   galleryShowCards.value = ilustrations.find(
     (ilustration) => ilustration.id == id
   );
-};
+}; */
 </script>
  
 <style scoped>
