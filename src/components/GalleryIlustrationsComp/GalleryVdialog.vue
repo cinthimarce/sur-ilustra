@@ -1,18 +1,8 @@
 <template>
     <div class="text-center">
-        <v-btn color="primary" @click="dialog = true">
-            Open Dialog
-        </v-btn>
-
-        <v-dialog v-model="dialog" width="auto">
+        <v-dialog :v-model="dialog" width="auto">
             <v-card>
-                <v-card-text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                </v-card-text>
-                <v-card-actions>
-                    <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
-                </v-card-actions>
+                <v-img :src="imageModel"></v-img>
             </v-card>
         </v-dialog>
     </div>
@@ -20,7 +10,9 @@
 
 <script setup>
 
-import { } from 'vue'
+import { defineProps } from 'vue'
+
+defineProps('imageModel','dialog')
 
 </script>
 

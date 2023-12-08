@@ -20,7 +20,7 @@
         </v-col>
         <!-- <v-btn variant="text" icon="mdi-chevron-down" @click="next"></v-btn> -->
       </v-card-actions>
-      <!-- IMAGE-->
+      <!-- IMAGE PRINCIPAL-->
       <v-col cols="d-flex">
         <v-card class="mx-auto" max-width="600" elevation="0">
           <div>
