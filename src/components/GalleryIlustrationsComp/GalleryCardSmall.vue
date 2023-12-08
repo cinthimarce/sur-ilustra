@@ -1,8 +1,8 @@
 <template>
     <v-card elevation="0" v-bind="props.props">
-        <v-img cover :src="props.src_image" class="border"></v-img>
-        <v-overlay :model-value="props.isHovering" contained scrim="#036358" class="align-center justify-center">
-            <v-btn icon="mdi-eye-outline" variant="text" color="nonary" @click="changeImage"></v-btn>
+        <v-img cover :src="props.src_image" class="border" ></v-img>
+        <v-overlay :model-value="props.isHovering" contained scrim="#036358" class="align-center justify-center" @click="changeImage">
+            <!-- <v-btn icon="mdi-eye-outline" variant="text" color="nonary" @click="changeImage"></v-btn> -->
         </v-overlay>
     </v-card>
 </template>

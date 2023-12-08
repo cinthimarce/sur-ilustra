@@ -39,29 +39,28 @@
               </v-img>
               <v-card-text>
                 <p class="font-weight-light text-septenary text-h6 ma-0">
-                  <!-- mt-4 ma-0 text-body-1 font-weight-bold -->
                   {{ item.title }}
                 </p>
-                <p class="text-caption font-weight-medium text-grey">
+                <p class="font-weight-medium text-grey subtext-card">
                   {{ item.subtext }}
                 </p>
               </v-card-text>
               
               <v-divider color="info"></v-divider>
               
-              <v-sheet class="d-flex mb-6 pt-6">
+              <v-sheet class="d-flex justify-center mb-4 pt-4">
                 <v-sheet
-                  class="pl-5 me-auto text-h5 font-weight-medium text-septenary"
+                  class="pl-5 text-h5 font-weight-bold text-septenary"
                   >{{ formatCurrency(item.price) }}</v-sheet
                 >
                 <v-sheet class="pr-5"
-                  ><v-btn
+                  ><!-- <v-btn
                     size="small"
                     elevation="0"
                     color="septenary"
                     icon="mdi-cart-outline"
                   ></v-btn
-                ></v-sheet>
+                > --></v-sheet>
               </v-sheet>
             </v-card>
           </v-hover>
@@ -199,5 +198,8 @@ const showCard = (id) => {
   background-color: #e3f26d;
   color: #315467;
   border-bottom: none;
+}
+.subtext-card{
+  font-size: 0.85rem;
 }
 </style>
