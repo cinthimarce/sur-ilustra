@@ -126,6 +126,7 @@ const formatCurrency = (value) =>{
   }).format(value)
 }
 
+
 //functions
 // function add(item) {
 //   let prod = {
