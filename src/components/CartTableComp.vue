@@ -34,24 +34,21 @@
           </thead>
           <tbody>
             <tr v-for="item in listStore" :key="item.name" class="text-center">
+              <td><v-img :src="item.image" max-width="80"></v-img></td>
               <td>{{ item.title }}</td>
               <td>{{ item.count }}</td>
               <td>{{ item.price.toLocaleString("es-CL") }}</td>
               <td>{{ displayWithMarco(item.withMarco) }}</td>
               <td>${{ item.total.toLocaleString("es-CL") }}</td>
-              <div class="d-flex justify-space-around align-center mt-4">
-                <td>
-                  <v-icon @click="cartStore.addStockCart(item.id)"
-                    >mdi-plus-circle</v-icon
-                  >
-                </td>
-                <td>
-                  <v-icon @click="removeStock(item.id)"
-                    >mdi-minus-circle</v-icon
-                  >
-                </td>
-                <td><v-icon @click="deleteItem(item)">mdi-delete</v-icon></td>
-              </div>
+              <td class="">
+                <v-icon @click="cartStore.addStockCart(item.id)"
+                  >mdi-plus-circle</v-icon
+                >
+                <v-icon @click="removeStock(item.id)"
+                  >mdi-minus-circle</v-icon
+                >
+                <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
+              </td>            
             </tr>
             <div class="text-center">
               <v-toolbar-title class="ml-4 mt-4 mb-4"
@@ -105,6 +102,7 @@ const displayWithMarco = (withMarco) => {
 };
 
 const headers = [
+  { text: "", value: "image"},
   { text: "Producto", value: "name" },
   { text: "Cantidad", value: "count" },
   { text: "Precio", value: "price" },
