@@ -1,97 +1,66 @@
 <template>
   <v-container>
-    <v-row d-flex align-center>
-      <!-- SMALL IMAGE-->
-      <v-card-actions class="d-flex align-center flex-column " height="200">
-        <!-- <v-btn variant="plain" icon="mdi-chevron-up" @click="prev"></v-btn> -->
-        <v-col cols="auto" class="pa-10">
-          <v-sheet :height="130" :width="130">
-            <v-hover v-slot="{ isHovering, props }">
-              <GalleyCardSmall :src_image="src_image" :isHovering="isHovering" :props="props"
-                @changeImage="handleChangeImage(src_image)" />
-            </v-hover>
-          </v-sheet>
-          <v-sheet :height="130" :width="130">
-            <v-hover v-slot="{ isHovering, props }">
-              <GalleyCardSmall :src_image="src_canva" :isHovering="isHovering" :props="props"
-                @changeImage="handleChangeImage(src_canva)" />
-            </v-hover>
-          </v-sheet>
-        </v-col>
-        <!-- <v-btn variant="text" icon="mdi-chevron-down" @click="next"></v-btn> -->
-      </v-card-actions>
-      <!-- IMAGE PRINCIPAL-->
-      <v-col cols="d-flex">
-        <v-card class="mx-auto" max-width="600" elevation="0">
-          <div>
-            <GalleryImg :src_image="currentImage" />
-          </div>
-        </v-card>
+    <v-row d-flex>
+      <!--CARRUSEL MODO MOBILE-->
+      <v-col cols="auto" class="d-md-none">
+        <CarruselGalleryMobile :image_src="src_image" :image_canva="src_canva"/>
+      </v-col>
+      <!--IMAGENES PEQUEÑAS MODO DESKTOP-->
+      <v-col class="d-none d-md-flex" cols="auto" md="2">
+        <v-card-actions class="d-flex align-center flex-column" height="200">
+          <v-col cols="auto" class="pa-10">
+            <v-sheet :height="130" :width="130">
+              <v-hover v-slot="{ isHovering, props }">
+                <GalleyCardSmall :src_image="src_image" :isHovering="isHovering" :props="props"
+                  @changeImage="handleChangeImage(src_image)" />
+              </v-hover>
+            </v-sheet>
+            <v-sheet :height="130" :width="130">
+              <v-hover v-slot="{ isHovering, props }">
+                <GalleyCardSmall :src_image="src_canva" :isHovering="isHovering" :props="props"
+                  @changeImage="handleChangeImage(src_canva)" />
+              </v-hover>
+            </v-sheet>
+          </v-col>
+        </v-card-actions>
+      </v-col>
+      <!--IMAGEN PRINCIPAL MODO DESKTOP-->
+      <v-col class="d-none d-md-flex" cols="12" md="6">
+        <GalleryImg :src_image="currentImage" />
       </v-col>
       <!--...-->
       <v-col cols="auto" order="12">
         <v-card class="mx-auto pt-1 px-4 " width="300" elevation="0">
           <!-- DESCRIPTION PRODUCT -->
-          <v-card-title class="color-title  pb-2 font-bold">{{
-            ilustration.title
-          }}</v-card-title>
-          <v-card-subtitle class="pt-2 pb-2 color-subtitle text-h6 ">
-            <div>{{ ilustration.text }}</div>
-          </v-card-subtitle>
-          <v-card-subtitle class="pt-2 pb-0  text-caption-2 text">
-            <div class="text">{{ ilustration.subtext }}</div>
-          </v-card-subtitle>
-          <v-card-text class="pt-2 text-h7  color-price">
-            <div>{{ ilustration.description }}</div>
-          </v-card-text>
-          <v-card-title class="text-h4 pt-2">
-            <div class="color-picture">
-              <h4 class="font-weight-light" elevation="0" v-if="checkboxEnmarcado == false">{{
-                formatCurrency(ilustration.price) }}</h4>
-              <h4 v-else>{{ formatCurrency(ilustration.priceMarco) }}</h4>
-            </div>
-            <v-card-text class="text-overline color-picture mt-2 pa-0">
-              <div v-if="checkboxEnmarcado == false">(*Precio por unidad)</div>
-                <v-fade-transition hide-on-leave>
-                  <v-card elevation="0"
-                    v-if="checkboxEnmarcado"
-                    class="mx-auto">
-                    <div class="color-picture">(*Precio por lámina + marco)</div>
-                  </v-card>
-                </v-fade-transition>
-            </v-card-text>
-            <div class="ps-1 color-title text-overline font-weight-bold pb-1 pt-3">Agregar Marco</div>
-            
-            <v-btn-toggle group>
-              <v-btn color="septenary" variant="outlined" :outlined="!checkboxEnmarcado" @click="toggleCheckbox">
-                $10.500
-              </v-btn>
-            </v-btn-toggle>
-
-          </v-card-title>
+          <CardDetails :details="ilustration"/>
+          <!--DETALLES DEL PRECIO-->
+          <PriceDetail
+            :checkboxEnmarcado="checkboxEnmarcado" :formatCurrency="formatCurrency"
+            :price="ilustration.price" :priceMarco="ilustration.priceMarco" @toggleCheckbox="toggleCheckbox"/>
           <!-- COUNT -->
           <GalleryCounter :count="count" @add="incrementProduct" @remove="decrementProduct" />
           <!-- BOTTOM ADD CART-->
-          <v-card-actions class="justify-center">
-            <v-btn class="color-bg-cart px-6 mb-4 ml-1" variant="text" color="septenary"
-              @click="addProduct(ilustration)">Agregar al Carrito</v-btn>
-          </v-card-actions>
+          <AddCartButton @addProduct="addProduct" :ilustration="ilustration"/>
         </v-card>
       </v-col>
     </v-row>
-    <!-- SNACKBAR V.MOBILE-->
-    <GallerySnackBar @snackbarClosed="handleSnackbarClosed" v-model="snackbarVisible" />
   </v-container>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted} from "vue";
 import { useCartStore } from "@/stores/cart";
 import { useRoute } from "vue-router";
-import GalleryImg from '../components/GalleryIlustrationsComp/GalleryImg.vue'
-import GalleyCardSmall from '../components/GalleryIlustrationsComp/GalleryCardSmall.vue'
+import { formatCurrency } from '../components/GalleryIlustrationsComp/base/FormatCurrency.js'
+import Swal from 'sweetalert2'
+
+import GalleryImg from '../components/GalleryIlustrationsComp/IsDesktop/GalleryImg.vue'
+import GalleyCardSmall from '../components/GalleryIlustrationsComp/IsDesktop/GalleryCardSmall.vue'
 import GalleryCounter from '../components/GalleryIlustrationsComp/GalleryCounter.vue'
-import GallerySnackBar from '../components/GalleryIlustrationsComp/GallerySnackBar.vue'
+import CarruselGalleryMobile from '../components/GalleryIlustrationsComp/IsMobile/CarruselGalleryMobile.vue'
+import CardDetails from '../components/GalleryIlustrationsComp/GalleryDetails/CardDetails.vue'
+import PriceDetail from '../components/GalleryIlustrationsComp/GalleryDetails/PriceDetails.vue'
+import AddCartButton from '../components/GalleryIlustrationsComp/GalleryDetails/AddCartButton.vue'
 
 
 const route = useRoute();
@@ -102,23 +71,28 @@ const ilustration = ref([]);
 
 const count = ref(0)
 
-//Manejo de imagene central en base a componente GalleryCardSmall
+//Manejo de las imagenes para los componentes 
 
-const src_image = ref(null);
-const src_canva = ref(null);
+// const src_image = require(`@/assets/img/casa${ilustrationId.value}.jpg`);
+// const src_canva = require(`@/assets/img/casa${ilustrationId.value}_canva.jpg`);
+const src_image = ref([])
+const src_canva = ref([])
 const currentImage = ref(`/img/casa${ilustrationId.value}.jpg`);
 
 const handleChangeImage = (newImage) => {
   currentImage.value = newImage
 }
 
-//snackbar
-const snackbarVisible = ref(false)
-function handleSnackbarClosed() {
-  snackbarVisible.value = false;
-}
-
-
+// const imageCarrusel = ref([
+//   {
+//     url: src_image,
+//     alt: 'Ilustracion uno'
+//   },
+//   {
+//     url: src_canva,
+//     alt: 'Ilustracion dos'
+//   },
+// ])
 
 // Button Enmarcado
 const checkboxEnmarcado = ref(false)
@@ -127,7 +101,7 @@ const toggleCheckbox = () => {
 };
 
 
-
+//Count Cart
 const incrementProduct = () => count.value++
 const decrementProduct = () => (count.value > 0 ? count.value-- : null)
 
@@ -143,16 +117,18 @@ const addProduct = (item) => {
     }
     cartStore.addProductCart(product);
     count.value = 0;
-    snackbarVisible.value = true;
+    Swal.fire({
+      title: "Producto agregado con exito",
+      //text:"",
+      icon: 'success',
+      iconColor: 'greenlight',
+      confirmButtonColor: 'green',
+      confirmButtonText: 'Entendido',
+      timer: 2000,
+      timerProgressBar: true,
+      //toast: true
+    })
   }
-}
-
-// funcion que formatea los precios a moneda chilena 
-const formatCurrency = (value) => {
-  return new Intl.NumberFormat('es-CL', {
-    style: 'currency',
-    currency: 'CLP',
-  }).format(value)
 }
 
 onMounted(() => {
@@ -160,14 +136,11 @@ onMounted(() => {
 
   src_image.value = `/img/casa${ilustrationId.value}.jpg`;
   src_canva.value = `/img/casa${ilustrationId.value}_canva.jpg`;
-
-  // console.log(ilustration.value)
-  // console.log(src_image.value)
 });
 </script>
 
 <style scoped>
-.font-bold {
+/* .font-bold {
   font-family: 'Homemade Apple', cursive;
   font-size: 1.6rem;
   color: #315467;
@@ -220,7 +193,8 @@ onMounted(() => {
 .precio-unidad {
   font-size: 0.8rem;
 }
-.btn-outlined{
-  border:#315467;
-}
+
+.btn-outlined {
+  border: #315467;
+} */
 </style>

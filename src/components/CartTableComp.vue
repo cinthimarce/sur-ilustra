@@ -40,15 +40,19 @@
               <td>{{ item.price.toLocaleString("es-CL") }}</td>
               <td>{{ displayWithMarco(item.withMarco) }}</td>
               <td>${{ item.total.toLocaleString("es-CL") }}</td>
-              <td class="">
-                <v-icon @click="cartStore.addStockCart(item.id)"
-                  >mdi-plus-circle</v-icon
-                >
-                <v-icon @click="removeStock(item.id)"
-                  >mdi-minus-circle</v-icon
-                >
-                <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
-              </td>            
+              <div class="d-flex justify-space-around align-center mt-4">
+                <td>
+                  <v-icon @click="cartStore.addStockCart(item.id)"
+                    >mdi-plus-circle</v-icon>
+                </td>
+                <td>
+                  <v-icon @click="removeStock(item.id)"
+                    >mdi-minus-circle</v-icon>
+                </td>
+                <td>
+                  <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
+                </td> 
+              </div>       
             </tr>
             <div class="text-center">
               <v-toolbar-title class="ml-4 mt-4 mb-4"

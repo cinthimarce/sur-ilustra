@@ -1,5 +1,5 @@
 <template>
-  <div class="desktop" v-if="isMobile">
+  <div class="desktop d-md-none">
     <!-- Color Background Menu Mobile -->
 
     <v-navigation-drawer
@@ -59,11 +59,11 @@
     </v-toolbar>
     <!-- NavBar Mobile Toolbar - MdiMenu navicon-->
   </div>
-  <!-- NavBar Desktop-->
 
-  <div class="desktop" v-if="!isMobile">
+  <!-- NavBar Desktop-->
+  <div class="desktop d-none d-md-flex">
     <v-image image="img/logo.png" size="40"></v-image>
-    <v-app-bar :elevation="0" color="senary" class="">
+    <v-app-bar :elevation="0" color="senary">
       <v-row d-flex justify="center">
         <v-img
           src="../assets/banner/logowhite.png"
@@ -103,20 +103,11 @@
 </template>
  
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref } from "vue";
 import { useCartStore } from '../stores/cart';
-const isMobile = ref(window.innerWidth < 500);
-const handleResize = () => {
-  isMobile.value = window.innerWidth < 500;
-};
-onMounted(() => {
-  window.addEventListener("resize", handleResize);
-});
-onBeforeUnmount(() => {
-  window.removeEventListener("resize", handleResize);
-});
+
 const cartStore = useCartStore();
-const drawer = ref(true);
+const drawer = ref(false);
 const tab = ref(null);
 const itemsNav = [
   {
