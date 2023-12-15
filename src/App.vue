@@ -10,6 +10,7 @@
   import { useCartStore } from "./stores/cart";
   const cartStore = useCartStore();
   cartStore.initializeGallery();
+  console.log(cartStore.galleryProducts);
 </script>
 
 <style>

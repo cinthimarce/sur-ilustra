@@ -3,7 +3,7 @@
     <v-row d-flex>
       <!--CARRUSEL MODO MOBILE-->
       <v-col cols="auto" class="d-md-none">
-        <CarruselGalleryMobile :image_src="src_image" :image_canva="src_canva"/>
+        <CarruselGalleryMobile :imageCarrusel="imageCarrusel"/>
       </v-col>
       <!--IMAGENES PEQUEÑAS MODO DESKTOP-->
       <v-col class="d-none d-md-flex" cols="auto" md="2">
@@ -42,6 +42,9 @@
           <!-- BOTTOM ADD CART-->
           <AddCartButton @addProduct="addProduct" :ilustration="ilustration"/>
         </v-card>
+        <pre>
+          {{ imageCarrusel }}
+        </pre>
       </v-col>
     </v-row>
   </v-container>
@@ -83,16 +86,16 @@ const handleChangeImage = (newImage) => {
   currentImage.value = newImage
 }
 
-// const imageCarrusel = ref([
-//   {
-//     url: src_image,
-//     alt: 'Ilustracion uno'
-//   },
-//   {
-//     url: src_canva,
-//     alt: 'Ilustracion dos'
-//   },
-// ])
+const imageCarrusel = ref([
+  {
+    url: require(`@/assets/img/casa${ilustrationId.value}.jpg`),
+    alt: 'Ilustracion uno'
+  },
+  {
+    url: require(`@/assets/img/casa${ilustrationId.value}_canva.jpg`),
+    alt: 'Ilustracion dos'
+  },
+])
 
 // Button Enmarcado
 const checkboxEnmarcado = ref(false)
