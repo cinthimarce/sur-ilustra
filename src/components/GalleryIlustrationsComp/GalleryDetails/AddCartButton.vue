@@ -20,5 +20,8 @@ const addProduct =() =>{
 </script>
 
 <style scoped>
-    
+.color-bg-cart{
+    background-color: #e3f26d;
+}
+
 </style>

@@ -86,16 +86,16 @@ const handleChangeImage = (newImage) => {
   currentImage.value = newImage
 }
 
-const imageCarrusel = ref([
-  {
-    url: require(`@/assets/img/casa${ilustrationId.value}.jpg`),
-    alt: 'Ilustracion uno'
-  },
-  {
-    url: require(`@/assets/img/casa${ilustrationId.value}_canva.jpg`),
-    alt: 'Ilustracion dos'
-  },
-])
+// const imageCarrusel = ref([
+//   {
+//     url: src_image,
+//     alt: 'Ilustracion uno'
+//   },
+//   {
+//     url: src_canva,
+//     alt: 'Ilustracion dos'
+//   },
+// ])
 
 // Button Enmarcado
 const checkboxEnmarcado = ref(false)
@@ -127,7 +127,7 @@ const addProduct = (item) => {
       iconColor: 'greenlight',
       confirmButtonColor: 'green',
       confirmButtonText: 'Entendido',
-      timer: 2000,
+      timer: 2500,
       timerProgressBar: true,
       //toast: true
     })
@@ -143,7 +143,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* .font-bold {
+.font-bold {
   font-family: 'Homemade Apple', cursive;
   font-size: 1.6rem;
   color: #315467;
@@ -199,5 +199,5 @@ onMounted(() => {
 
 .btn-outlined {
   border: #315467;
-} */
+} 
 </style>

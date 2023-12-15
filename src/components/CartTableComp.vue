@@ -1,30 +1,32 @@
 <template>
-  <v-container class="cart">
+  <v-container class="cart" >
     <v-row justify="center">
       <v-col align-self="center">
-        <v-card color="basil" elevation="0">
-          <v-card-title class="text-center justify-center pb-2">
-            <h1 class="font-weight-bold text-h4 text-basil">
+        <v-card color="caudex" elevation="0">
+          <v-card-title class="text-center justify-center pb-0 mb-0 mt-2">
+            <h1 class="font-weight-bold text-h4 text-caudex ">
               Finalizar Compra
             </h1>
           </v-card-title>
 
-
           <v-window v-model="tab">
             <v-window-item >
-              <v-card color="basil" flat>
-                <v-card-text class="d-flex justify-center text-send"> Envíos a todo Chile </v-card-text>
+              <v-card color="caudex" flat>
+                <v-card-text class="d-flex justify-center text-send"><v-icon class="mr-2" >mdi-truck-fast</v-icon> Envíos a todo Chile <v-icon class="ml-2" >mdi-truck-fast</v-icon> </v-card-text>
               </v-card>
             </v-window-item>
           </v-window>
         </v-card>
+        
+        <v-divider class="pb-2"></v-divider>
+        <v-card class="subtext-caudex mb-2" title="Carrito (3 Productos)" text="" variant="tonal" color="caudex" ></v-card>
 
-        <!-- <h1 class="pb-8 text-center">Finalizar Compra</h1> -->
-        <v-table>
+        
+        <v-table class="my-4">
           <thead>
             <tr>
               <th
-                class="text-center"
+                class="text-center text-table-head pr-16 "
                 v-for="header in headers"
                 :key="header.text"
               >
@@ -32,54 +34,53 @@
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="item in listStore" :key="item.name" class="text-center">
-              <td><v-img :src="item.image" max-width="80"></v-img></td>
-              <td>{{ item.title }}</td>
-              <td>{{ item.count }}</td>
-              <td>{{ item.price.toLocaleString("es-CL") }}</td>
-              <td>{{ displayWithMarco(item.withMarco) }}</td>
-              <td>${{ item.total.toLocaleString("es-CL") }}</td>
-              <div class="d-flex justify-space-around align-center mt-4">
-                <td>
-                  <v-icon @click="cartStore.addStockCart(item.id)"
-                    >mdi-plus-circle</v-icon>
-                </td>
-                <td>
-                  <v-icon @click="removeStock(item.id)"
-                    >mdi-minus-circle</v-icon>
-                </td>
-                <td>
-                  <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
-                </td> 
-              </div>       
+          <tbody class=" text-table ">
+            <tr v-for="item in listStore" :key="item.name" class="my-8">
+              <td class=" py-3  "><v-img :src="item.image" width="120"></v-img></td>
+              <td class=" py-3">{{ item.title }}</td>
+              <td class=" text-center pr-12">{{ item.count }}</td>
+              <td >{{ item.price.toLocaleString("es-CL") }}</td>
+              <td class=" text-center pr-16">{{ displayWithMarco(item.withMarco) }}</td>
+              <td  class="">${{ item.total.toLocaleString("es-CL") }}</td>
+              <td>
+                <v-icon class="mr-1" @click="removeStock(item.id)"
+                  >mdi-minus-circle</v-icon
+                >
+                <v-icon class="mr-1" @click="cartStore.addStockCart(item.id)"
+                  >mdi-plus-circle</v-icon
+                >
+                <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
+              </td>            
             </tr>
-            <div class="text-center">
-              <v-toolbar-title class="ml-4 mt-4 mb-4"
+          </tbody>
+        </v-table>
+        
+        <div class="d-flex justify-end subtext-caudex" >
+          <v-sheet> 
+              <v-toolbar-title v-for="n in 1" :key="n"  class="pt-1 ml-4 mt-2 mb-4 pr-16 subtext-caudex"
                 >Total Compras:
                 <span class="text-success"
                   >${{ cartStore.cartTotalPrice.toLocaleString("es-CL") }}</span
                 ></v-toolbar-title
               >
+            </v-sheet>
             </div>
-          </tbody>
-        </v-table>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card color="primary">
-            <v-card-title class="text-h5 text-center"
-              >¿desea eliminar el producto?</v-card-title
-            >
+        <v-dialog class="delete-dialog" v-model="dialogDelete" max-width="500px">
+          <v-card class="pt-2 pb-1 " color="nonary">
+            <v-card-title class="text-h6 text-center pt-2 delete-dialog"
+              >¿Desea eliminar el producto?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue-darken-1" variant="text" @click="closeDelete"
-                >Cancel <v-icon color="red" size="25">mdi-close</v-icon></v-btn
-              >
+              
               <v-btn
-                color="blue-darken-1"
-                variant="text"
+                color="senary"
+                variant="flat"
                 @click="deleteItemConfirm"
-                >OK
-                <v-icon color="success" size="25">mdi-check-bold</v-icon></v-btn
+                >Aceptar
+                <v-icon color="primary" size="25">mdi-check</v-icon></v-btn
+              >
+              <v-btn color="senary" variant="flat" @click="closeDelete"
+                >Cancelar <v-icon color="primary" size="25">mdi-close</v-icon></v-btn
               >
               <v-spacer></v-spacer>
             </v-card-actions>
@@ -106,8 +107,8 @@ const displayWithMarco = (withMarco) => {
 };
 
 const headers = [
-  { text: "", value: "image"},
-  { text: "Producto", value: "name" },
+  { text: "Producto", value: "image"},
+  { text: "", value: "name" },
   { text: "Cantidad", value: "count" },
   { text: "Precio", value: "price" },
   { text: "Enmarcado", value: "withMarco" },
@@ -132,17 +133,33 @@ const deleteItemConfirm = () => {
 </script>
  
 <style scoped>
-.style-font-title {
-  font-family: "";
+
+.delete-dialog{
+    color: #8AA49B  !important;
+    font-family: 'Hepta Slab', serif !important; 
+    font-size: 0.1rem;
 }
-.bg-basil {
-    background-color: #F7F7F7 !important;
-  }
-  .text-basil {
+.text-caudex {
     color: #8AA49B !important;
     font-family: 'Caudex', serif !important; 
-  }
-  .text-send{
-    font-family: 'Quattrocento Sans', sans-serif !important; 
-  }
+}
+.subtext-caudex {
+    color: #315467 !important;
+    font-family: 'Caudex', serif !important; 
+}
+.text-send{
+    color: #8AA49B !important;
+    font-family: 'Hepta Slab', serif !important; 
+    font-size: 1rem;
+}
+.text-table{
+    color: #8AA49B !important;
+    font-family: 'Hepta Slab', serif !important; 
+    font-size: 1rem;
+}
+.text-table-head{
+    color: #315467 !important;
+    font-family: 'Hepta Slab', serif !important; 
+    font-size: 1rem;
+}
 </style>
