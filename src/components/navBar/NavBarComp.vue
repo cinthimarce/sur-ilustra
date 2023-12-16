@@ -45,6 +45,11 @@ const itemsNav = [
         icon: "mdi-cellphone-message",
         to: "/contact",
     },
+    {
+        name: "Compras",
+        icon: "mdi-shopping",
+        to: "/cart",
+    },
 ];
 
 </script>

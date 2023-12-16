@@ -1,6 +1,5 @@
 <template>
     <div>
-        <v-image image="img/logo.png" size="40"></v-image>
         <v-app-bar :elevation=0 color="senary">
             <v-row d-flex justify="center">
                 <v-img :src="props.logo" max-height="40" max-width="60" pl-10 contain></v-img>
