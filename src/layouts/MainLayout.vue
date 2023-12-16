@@ -15,8 +15,8 @@
 </template>
 
 <script setup >
-import NavBarComp from '../components/NavBarComp.vue'
-import FooterComp from '@/components/FooterComp.vue'
+import NavBarComp from "@/components/navBar/NavBarComp.vue"
+import FooterComp from '@/components/footer/FooterComp.vue'
 
 </script>
 

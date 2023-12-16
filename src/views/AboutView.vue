@@ -9,6 +9,6 @@
   <script setup>
 
   import MainLayout from '../layouts/MainLayout.vue';
-  import AboutComp from '../components/AboutComp.vue';
+  import AboutComp from '../components/about/AboutComp.vue';
 
   </script>

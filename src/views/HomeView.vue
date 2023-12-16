@@ -1,13 +1,14 @@
 <template>
   <MainLayout>
     <template #main>
-      <CarruselComp/>
+      <HomeComp/>
     </template>
   </MainLayout>
 </template>
- 
+
 <script setup>
-import CarruselComp from '@/components/CarruselComp.vue';
+import HomeComp from "@/components/home/HomeComp.vue"
+
 import MainLayout from '../layouts/MainLayout.vue';
- 
+
 </script>

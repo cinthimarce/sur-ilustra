@@ -6,9 +6,9 @@
     </MainLayout>
   </template>
    
-  <script setup>
-
-  import MainLayout from '../layouts/MainLayout.vue';
-  import ContactComp from '@/components/ContactComp.vue';
+<script setup>
+import MainLayout from '../layouts/MainLayout.vue';
+import ContactComp from '@/components/contact/ContactComp.vue';
+ 
    
-  </script>
+</script>
