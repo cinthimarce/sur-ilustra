@@ -5,7 +5,7 @@
             <div>{{ props.details.text }}</div>
         </v-card-subtitle>
         <v-card-subtitle class="pt-2 pb-0  text-caption-2 text">
-            <div class="text">{{ props.details.subtext}}</div>
+            <div class="text">{{ props.details.subtext }}</div>
         </v-card-subtitle>
         <v-card-text class="pt-2 text-h7  color-price">
             <div>{{ props.details.description }}</div>
@@ -23,18 +23,20 @@ const props = defineProps(['details'])
 
 <style scoped>
 .font-bold {
-  font-family: 'Homemade Apple', cursive;
-  font-size: 1.6rem;
-  color: #315467;
+    font-family: 'Homemade Apple', cursive;
+    font-size: 1.6rem;
+    color: #315467;
 }
+
 .text-caption-2 {
-  font-size: 0.98rem;
+    font-size: 0.98rem;
 }
+
 .color-subtitle {
-  color: #315467;
+    color: #315467;
 }
 
 .color-price {
-  color: #8AA49B;
+    color: #8AA49B;
 }
 </style>

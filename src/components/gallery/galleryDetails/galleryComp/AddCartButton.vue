@@ -1,7 +1,7 @@
 <template>
     <v-card-actions class="justify-center">
             <v-btn class="color-bg-cart px-6 mb-4 ml-1" variant="text" color="septenary"
-              @click="addProduct(props.ilustration)">Agregar al Carrito</v-btn>
+            @click="addProduct(props.ilustration)">Agregar al Carrito</v-btn>
     </v-card-actions>
 </template>
 
@@ -20,8 +20,5 @@ const addProduct =() =>{
 </script>
 
 <style scoped>
-.color-bg-cart{
-    background-color: #e3f26d;
-}
-
+    
 </style>

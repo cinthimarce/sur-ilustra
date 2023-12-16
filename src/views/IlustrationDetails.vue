@@ -1,15 +1,16 @@
 <template>
-  <MainLayout>
-    <template #main>
-      <GalleryIllustrationComp />
-    </template>
-  </MainLayout>
+    <MainLayout>
+        <template #main>
+            <IlustrationDetails/>
+        </template>
+    </MainLayout>
 </template>
-  
-  <script setup>
-import MainLayout from "../layouts/MainLayout.vue";
-import GalleryIllustrationComp from "@/components/GalleryIllustrationComp.vue";
+
+<script setup>
+import MainLayout from '@/layouts/MainLayout.vue';
+import IlustrationDetails from '@/components/gallery/galleryDetails/ilustrationDetails.vue';
+import { } from 'vue'
+
 </script>
-  
-  <style scoped>
-</style>
+
+<style scoped></style>

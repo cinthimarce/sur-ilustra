@@ -1,20 +1,17 @@
 <template>
-  <MainLayout>
-      <template #main>
-          <GalleryHoverComp/>
-      </template>
-  </MainLayout>
+    <MainLayout>
+        <template #main>
+            <IlustrationComp/>
+        </template>
+    </MainLayout>
 </template>
 
 <script setup>
 import MainLayout from '@/layouts/MainLayout.vue';
-
-/* import GalleryComp from '@/components/GalleryComp.vue'*/
-
-import GalleryHoverComp from '@/components/GalleryHoverComp.vue';
+import IlustrationComp from '@/components/gallery/IlustrationComp.vue'
 
 </script>
 
 <style scoped>
- 
+
 </style>
