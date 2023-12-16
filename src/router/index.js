@@ -5,6 +5,7 @@ import IlustrationView from '../views/IlustrationView.vue'
 import ScultView from '../views/ScultView.vue'
 import CartView from '../views/CartView.vue'
 import ContactView from '../views/ContactView.vue'
+import AvecillasView from '@/views/AvecillasView.vue'
 
 
 const routes = [
@@ -17,7 +18,7 @@ const routes = [
     path: '/about',
     name: 'about',
     component: AboutView
-  },
+  },  
   {
     path: '/ilustration',
     name: 'ilustration',
@@ -27,6 +28,11 @@ const routes = [
     path: '/ilustration/:id',
     name:'ilustrationDetails',
     component: () => import('@/views/IlustrationDetails.vue')
+  },
+  {
+    path: '/avecillas',
+    name: 'avecillas',
+    component: AvecillasView
   },
   {
     path: '/scult',

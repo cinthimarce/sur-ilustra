@@ -5,7 +5,7 @@ import { galeria } from "@/lib/data";
 export const useCartStore = defineStore('cart', {
     state: () => ({
         cart: [],
-        gallery: { ilustrations: [], scultures: [] }
+        gallery: { ilustrations: [], scultures: [],  avecillas: []  }
     }),
     getters: {
         getCartList(state) {

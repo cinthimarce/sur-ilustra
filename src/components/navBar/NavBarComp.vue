@@ -31,10 +31,15 @@ const itemsNav = [
         icon: "mdi-draw",
     },
     {
+        name: "Avecillas",
+        icon: "mdi-drawing",
+        to: "/avecillas",
+    },
+/*     {
         name: "Escultura",
         icon: "mdi-drawing",
         to: "/scult",
-    },
+    }, */
     {
         name: "Sobre",
         icon: "mdi-information-variant",

@@ -89,5 +89,31 @@ export const galeria = {
             "image": "img/loi.png",
             "price": "$28.000"
         },
+    ],
+    "avecillas": [
+        {
+            "id": 1,
+            "title": "Primera escultura",
+            "image": "img/gorrion.jpg",
+            "price": "$28.000"
+        },
+        {
+            "id": 2,
+            "title": "Segunda escultura",
+            "image": "img/chucao.jpg",
+            "price": "$28.000"
+        },
+        {
+            "id": 3,
+            "title": "Tercera escultura",
+            "image": "img/casa.jpg",
+            "price": "$28.000"
+        },
+        {
+            "id": 4,
+            "title": "Cuarta escultura",
+            "image": "img/loi.png",
+            "price": "$28.000"
+        },
     ]
 }
