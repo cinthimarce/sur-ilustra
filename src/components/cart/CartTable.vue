@@ -38,7 +38,6 @@
                 producto?</v-card-title>
             <v-card-actions>
                 <v-spacer></v-spacer>
-
                 <v-btn color="senary" variant="flat" @click="deleteItemConfirm">Aceptar
                     <v-icon color="primary" size="25">mdi-check</v-icon></v-btn>
                 <v-btn color="senary" variant="flat" @click="closeDelete">Cancelar <v-icon color="primary"
@@ -47,6 +46,9 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
+    <v-card-actions class="justify-center">
+          <v-btn class="color-bg-cart px-6 mb-4 ml-1" variant="text" color="septenary"> Pagar </v-btn>
+        </v-card-actions>
 </template>
 
 <script setup>
@@ -97,6 +99,10 @@ const deleteItemConfirm = () => {
 </script>
 
 <style scoped>
+.color-bg-cart{
+    background-color: #e3f26d;
+}
+
 .delete-dialog {
     color: #8AA49B !important;
     font-family: 'Hepta Slab', serif !important;

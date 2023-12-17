@@ -1,10 +1,10 @@
 <template>
-  <v-carousel :show-arrows="false">
+  <v-carousel :show-arrows="false" hide-delimiter-background>
     <v-carousel-item
       v-for="(item,i) in props.imageCarousel"
       :key="i"
       :src="item.url"
-      cover
+      
     ></v-carousel-item>
   </v-carousel>
 </template>

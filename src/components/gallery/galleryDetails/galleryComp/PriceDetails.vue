@@ -35,4 +35,8 @@ const toggleCheckbox = () => {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.color-picture{
+    color: #315467;
+}
+</style>

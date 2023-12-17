@@ -1,7 +1,7 @@
 <template>
     <v-container class="pa-4 text-center">
         <BreadcrumbsComp :rutas="rutas" />
-        <BaseGallery :productos="ilustrations" @redirectTo="redirectIlustration" />
+        <BaseGallery :productos="ilustrations" @redirectTo="redirectIlustration"/>
     </v-container>
 </template>
 

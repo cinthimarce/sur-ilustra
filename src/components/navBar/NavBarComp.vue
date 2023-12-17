@@ -13,7 +13,7 @@
 import NavBarMobile from "../navBar/IsMobile/NavBarMobile.vue"
 import NavBarDesktop from "./Desktop/NavBarDesktop.vue";
 
-const logoOne = require('../../assets/banner/logowhite.png');
+const logoOne = require('../../assets/banner/logoazul.png');
 const logoTwo = require('../../assets/banner/logo2.png');
 
 
@@ -28,11 +28,11 @@ const itemsNav = [
     {
         name: "Ilustración",
         to: "/ilustration",
-        icon: "mdi-draw",
+        icon: "mdi-fountain-pen-tip",
     },
     {
         name: "Avecillas",
-        icon: "mdi-drawing",
+        icon: "mdi-bird",
         to: "/avecillas",
     },
 /*     {
@@ -42,12 +42,12 @@ const itemsNav = [
     }, */
     {
         name: "Sobre",
-        icon: "mdi-information-variant",
+        icon: "mdi-information",
         to: "/about",
     },
     {
         name: "Contacto",
-        icon: "mdi-cellphone-message",
+        icon: "mdi-phone",
         to: "/contact",
     },
     {

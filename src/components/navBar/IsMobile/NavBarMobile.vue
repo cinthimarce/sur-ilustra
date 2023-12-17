@@ -25,11 +25,13 @@
 
         <!-- NavBar Mobile Toolbar - MdiMenu navicon-->
         <v-toolbar app dark prominent color="senary">
-            <v-app-bar-nav-icon size="60" @click="toggleButton" color="secondary">
+            <v-app-bar-nav-icon size="60" @click="toggleButton" color="primary">
             </v-app-bar-nav-icon>
             <v-spacer></v-spacer>
-            <v-row>
-                <v-img :src="props.LogoTwo" max-height="70" max-width="90"></v-img>
+            <v-row class="d-flex justify-space-around pl-16">
+                <!-- <v-icon color="primary"> mdi-cart</v-icon> -->
+                <!-- <h3 class="logo-text pt-3">Humberto Vera</h3> -->
+                <v-img src="@/assets/banner/logowhite.png" max-height="50" max-width="100"  class=""></v-img>
             </v-row>
             <!-- <v-app-bar-title>Sur Ilustra</v-app-bar-title> -->
         </v-toolbar>
@@ -57,4 +59,10 @@ const toggleButton = () => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.logo-text {
+
+font-family: "Homemade Apple", cursive;
+font-size: 1.2rem;
+}
+</style>
