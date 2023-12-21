@@ -6,6 +6,7 @@ import ScultView from '../views/ScultView.vue'
 import CartView from '../views/CartView.vue'
 import ContactView from '../views/ContactView.vue'
 import AvecillasView from '@/views/AvecillasView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
 
 
 const routes = [
@@ -49,6 +50,10 @@ const routes = [
     name: 'cart',
     component: CartView
   },
+  {
+    path:'/:pathMatch(.*)*',
+    component: NotFoundView
+  }
 
 
 
