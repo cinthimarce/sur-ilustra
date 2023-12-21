@@ -1,8 +1,6 @@
 <template>
   <v-app id="app">
-    <Transition>
       <router-view />
-    </Transition>
   </v-app>
 </template>
  
