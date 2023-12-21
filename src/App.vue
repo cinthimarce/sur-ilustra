@@ -7,9 +7,9 @@
 </template>
  
 <script setup>
-  import { useCartStore } from "./stores/cart";
-  const cartStore = useCartStore();
-  cartStore.initializeGallery();
+  import { useGalleryStore } from "@/stores/gallery.js";
+const galleryStore = useGalleryStore()
+galleryStore.initializeGallery()
 </script>
 
 <style>

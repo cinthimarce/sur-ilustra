@@ -11,13 +11,13 @@
             <tr v-for="item in listStore" :key="item.name" class="my-8">
                 <td class=" py-3  "><v-img :src="require(`@/assets/${item.image}`)" width="120"></v-img></td>
                 <td class=" py-3">{{ item.title }}</td>
-                <td class=" text-center pr-12">{{ item.count }}</td>
-                <td>{{ item.price.toLocaleString("es-CL") }}</td>
-                <td class=" text-center pr-16">{{ displayWithMarco(item.withMarco) }}</td>
+                <td class=" text-center pr-12">{{ item.quantity }}</td>
+                <td>{{ formatCurrency(item.price) }}</td>
+                <td class=" text-center pr-16">{{ displayWithMarco(item.withFrame) }}</td>
                 <td class="">${{ item.total.toLocaleString("es-CL") }}</td>
                 <td>
-                    <v-icon class="mr-1" @click="removeProduct(item.id)">mdi-minus-circle</v-icon>
-                    <v-icon class="mr-1" @click="addProduct(item.id)">mdi-plus-circle</v-icon>
+                    <v-icon class="mr-1" @click="subtractProduct(item.id, item.withFrame)">mdi-minus-circle</v-icon>
+                    <v-icon class="mr-1" @click="addProduct(item.id,item.withFrame)">mdi-plus-circle</v-icon>
                     <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
                 </td>
             </tr>
@@ -28,7 +28,7 @@
         <v-sheet>
             <v-toolbar-title v-for="n in 1" :key="n" class="pt-1 ml-4 mt-2 mb-4 pr-16 subtext-caudex">Total
                 Compras:
-                <span class="text-success">${{ cartStore.cartTotalPrice.toLocaleString("es-CL")
+                <span class="text-success">{{ formatCurrency(cartStore.cartTotalPrice)
                 }}</span></v-toolbar-title>
         </v-sheet>
     </div>
@@ -54,17 +54,18 @@
 <script setup>
 import { useCartStore } from "@/stores/cart";
 import { ref, computed } from 'vue'
+import { formatCurrency } from "../gallery/base/FormatCurrent";
 
 const dialogDelete = ref(false);
 const deleteId = ref(null);
-
+const deleteWithFrame = ref(null)
 const cartStore = useCartStore()
 const listStore = computed(() => cartStore.getCartList
 )
 
 // si tiene enmarcado
-const displayWithMarco = (withMarco) => {
-    return withMarco ? "Si" : "No";
+const displayWithMarco = (withFrame) => {
+    return withFrame ? "Si" : "No";
 };
 const headers = [
     { text: "Producto", value: "image" },
@@ -77,23 +78,26 @@ const headers = [
 ];
 
 
-const addProduct = (item) => {
-    cartStore.addStockCart(item)
+//agregando,sacando y eliminando productos del carrito
+const addProduct = (id, withFrame) => {
+    cartStore.addStockCart({ id, withFrame })
 }
-const removeProduct = (item) => {
-    cartStore.removeStockCart(item)
+
+const subtractProduct = (id, withFrame) => {
+    cartStore.subtractStockCart({ id, withFrame })
 }
 
 const deleteItem = (item) => {
     deleteId.value = item.id;
+    deleteWithFrame.value = item.withFrame;
     dialogDelete.value = true;
 };
 const closeDelete = () => {
     dialogDelete.value = false;
 };
 const deleteItemConfirm = () => {
-    cartStore.removeProductCart(deleteId.value);
-    closeDelete();
+    cartStore.removeProductCart({ id: deleteId.value,    withFrame: deleteWithFrame.value });
+    dialogDelete.value = false
 };
 
 </script>

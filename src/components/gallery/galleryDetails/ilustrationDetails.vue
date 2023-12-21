@@ -35,10 +35,9 @@
                     <!-- DESCRIPCIÓN DEL PRODUCTO -->
                     <CardDetails :details="ilustration" />
                     <!--DETALLES DEL PRECIO-->
-                    <PriceDetails :checkboxEnmarcado="checkboxEnmarcado" :formatCurrency="formatCurrency"
-                        :price="ilustration.price" :priceMarco="ilustration.priceMarco" @toggleCheckbox="toggleCheckbox" />
+                    <PriceDetails :descripcion-precio="descripcionPrecio" :marco-agregado="marcoAgregado" @toggle-marco="toggleMarco" :precio-mostrado="precioMostrado" :format-currency="formatCurrency"/>
                     <!--PRODUCT COUNTER-->
-                    <ProductCounter :count="count" @add="incrementProduct" @remove="decrementProduct" />
+                    <ProductCounter :count="countProduct" @add="incrementProduct" @remove="decrementProduct" />
                     <!-- BOTTOM ADD CART-->
                     <AddCartButton @add-product="addProduct" :ilustration="ilustration" />
                 </v-card>
@@ -49,8 +48,9 @@
 
 <script setup>
 import { useRoute } from "vue-router"
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useCartStore } from "@/stores/cart";
+import { useGalleryStore } from "@/stores/gallery";
 import { formatCurrency } from "../base/FormatCurrent";
 import Swal from 'sweetalert2'
 
@@ -66,53 +66,68 @@ import GalleryCardSmall from "./galleryIsDesktop/GalleryCardSmall.vue";
 
 
 const route = useRoute()
-const ilustrationId = ref(route.params.id)
-//const nameIlustration = ref(route.params.title)
+const nameIlustration = route.params.title
+const ilustrationId = route.params.id
+const cartStore = useCartStore()
+const galleryStore = useGalleryStore()
+const ilustration = ref([])
 
-const count = ref(0)
 
 //MANEJO DE IMAGENES
-const src_image = ref(require(`@/assets/img/casa${ilustrationId.value}.jpg`))
-const src_canva = ref(require(`@/assets/img/casa${ilustrationId.value}_canva.jpg`))
-const currentImage = ref(require(`@/assets/img/casa${ilustrationId.value}.jpg`))
+const src_image = ref(require(`@/assets/img/casa${ilustrationId}.jpg`))
+const src_canva = ref(require(`@/assets/img/casa${ilustrationId}_canva.jpg`))
+const currentImage = ref(require(`@/assets/img/casa${ilustrationId}.jpg`))
 
 const handleChangeImage = (newImage) => {
     currentImage.value = newImage
 }
 
-const cartStore = useCartStore()
-const ilustration = ref([])
-
 //carousel images Mobile
 const imageCarousel = [
     {
-        url: require(`@/assets/img/casa${ilustrationId.value}.jpg`),
+        url: require(`@/assets/img/casa${ilustrationId}.jpg`),
         alt: 'imagen de ilustración uno'
     },
     {
-        url: require(`@/assets/img/casa${ilustrationId.value}_canva.jpg`),
+        url: require(`@/assets/img/casa${ilustrationId}_canva.jpg`),
         alt: 'imagen de ilustración uno'
     }
 ]
 
-// Button Enmarcado
-const checkboxEnmarcado = ref(false)
-const toggleCheckbox = () => {
-    checkboxEnmarcado.value = !checkboxEnmarcado.value;
-};
+//toogleButtons
+const marcoAgregado = ref(false)
+const toggleMarco = () => {
+    marcoAgregado.value = !marcoAgregado.value
+
+}
+const precioMostrado = computed(() => {
+    const opciones = ilustration.value?.opciones;
+    if (opciones && opciones.length >= 2) {
+        return marcoAgregado.value ? opciones[1].price : opciones[0].price;
+    }
+    return 0;
+});
+const descripcionPrecio = computed(() => {
+    return marcoAgregado.value && ilustration.value?.opciones ? '(*Precio por lámina + marco)' : '(*Precio por unidad)';
+});
+//Contador de productos
+const countProduct = ref(0)
+const incrementProduct = () => countProduct.value++
+const decrementProduct = () => (countProduct.value > 0 ? countProduct.value-- : null)
 
 const addProduct = (item) => {
-    if (count.value > 0) {
+    if (countProduct.value > 0) {
+        const price = marcoAgregado.value ? item.opciones[1].price : item.opciones[0].price
         let product = {
             id: item.id,
             title: item.title,
             image: item.image,
-            count: count.value,
-            withMarco: checkboxEnmarcado.value,
-            price: checkboxEnmarcado.value ? item.priceMarco : item.price
+            quantity: countProduct.value,
+            withFrame: marcoAgregado.value,
+            price: price
         }
-        cartStore.addProductCart(product);
-        count.value = 0;
+        cartStore.addProductToCart(product);
+        countProduct.value = 0;
         Swal.fire({
             title: "Producto agregado con exito",
             //text:"",
@@ -120,39 +135,38 @@ const addProduct = (item) => {
             iconColor: 'greenlight',
             confirmButtonColor: 'green',
             confirmButtonText: 'Entendido',
-            timer: 2000,
+            timer: 1500,
             timerProgressBar: true,
             //toast: true
         })
     }
 }
 
+// RUTAS DE BREADCRUMBS
 const rutas = [
     {
         title: 'Inicio',
         disabled: false,
-        href: '/'
+        to: '/'
     },
     {
         title: 'Ilustraciones',
         disabled: false,
-        href: '/ilustration'
+        to: '/ilustration'
     },
     {
-        title: 'Detalles',
+        title: nameIlustration,
         disabled: true
     }
 ]
 
-//Count Cart
-const incrementProduct = () => count.value++
-const decrementProduct = () => (count.value > 0 ? count.value-- : null)
+
 
 onMounted(() => {
-    ilustration.value = cartStore.getIlustrationById(ilustrationId.value)
-
-    // src_image.value = require(`@/assets/img/casa${ilustrationId.value}.jpg`)
-    // src_canva.value = require(`@/assets/img/casa${ilustrationId.value}.jpg`)
+    ilustration.value = galleryStore.getIlustrationByTitle(nameIlustration)
+    console.log(ilustrationId);
+    console.log(nameIlustration);
+    console.log(ilustration.value);
 })
 </script>
 

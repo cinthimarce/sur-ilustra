@@ -7,24 +7,24 @@
 
 <script setup>
 import BaseGallery from './base/BaseGallery.vue';
-import { useCartStore } from '@/stores/cart.js'
+import { useGalleryStore } from '@/stores/gallery';
 import BreadcrumbsComp from './base/BreadcrumbsComp.vue';
 import { useRouter } from 'vue-router';
 
 
 const route = useRouter()
 
-const cartStore = useCartStore()
-const ilustrations = cartStore.galleryProducts.ilustrations
+const galleryStore = useGalleryStore()
+const ilustrations = galleryStore.galleryProducts.ilustrations
 
-const redirectIlustration = (id) => {
-    route.push(`/ilustration/${id}`)
+const redirectIlustration = (title,id) => {
+    route.push(`/ilustration/${title}/${id}`)
 }
 const rutas = [
     {
         title: 'Inicio',
         disabled: false,
-        href: '/'
+        to: '/'
     },
     {
         title: 'Ilustraciones',

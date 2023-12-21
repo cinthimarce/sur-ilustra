@@ -8,8 +8,19 @@ export const galeria = {
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa1.jpg",
             "canva": "img/casa1_canva.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 2,
@@ -19,8 +30,19 @@ export const galeria = {
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa2.jpg",
             "canva": "img/casa2_canva.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 3,
@@ -29,8 +51,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa3.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 4,
@@ -39,8 +72,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa4.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 5,
@@ -50,8 +94,19 @@ export const galeria = {
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa5.jpg",
             "canva": "img/casa5_canva.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 6,
@@ -60,8 +115,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa6.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 7,
@@ -70,8 +136,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa7.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 8,
@@ -80,8 +157,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa8.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 9,
@@ -90,8 +178,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa9.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 10,
@@ -100,8 +199,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa10.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 11,
@@ -110,8 +220,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa11.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 12,
@@ -120,8 +241,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa12.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 13,
@@ -130,8 +262,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa13.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 14,
@@ -140,8 +283,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa14.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 15,
@@ -150,8 +304,19 @@ export const galeria = {
             "subtext": "Ilustración a mano, tinta y acuarela",
             "description": "Papel: Hahnemuhle Photo Matt Fribe Duo 210 gsm.",
             "image": "img/casa15.jpg",
-            "price": 28000,
-            "priceMarco": 38500
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
     ],
     "esculturas": [
@@ -185,13 +350,37 @@ export const galeria = {
             "id": 1,
             "title": "Gorrión",
             "image": "img/gorrion.jpg",
-            "price": "$28.000"
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
         {
             "id": 2,
             "title": "Chucao",
             "image": "img/chucao.jpg",
-            "price": "$28.000"
+            "opciones": [
+                {
+                    "id": 1,
+                    "name": 'Sin Marco',
+                    "price": 28000
+                },
+                {
+                    "id": 2,
+                    "name": 'Con Marco',
+                    "price": 38500
+                },
+                
+            ],
         },
     ]
 }

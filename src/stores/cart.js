@@ -1,86 +1,65 @@
 import { defineStore } from "pinia";
-import { galeria } from "@/lib/data";
 
-
-export const useCartStore = defineStore('cart', {
-    state: () => ({
-        cart: [],
-        gallery: { ilustrations: [], scultures: [],  avecillas: []  }
-    }),
-    getters: {
-        getCartList(state) {
-            return state.cart.map(prod => {
-                const myProd = prod
-                myProd.total = prod.count * prod.price
-                return myProd
-            })
-        },
-        cartCount(state) {
-            return state.cart.length
-        },
-        cartTotalProducts(state){
-            return state.cart.reduce((total, prod) => total + prod.count,0)
-        },
-        galleryProducts(state) {
-            return state.gallery
-        },
-        cartTotalPrice() {
-            return this.getCartList.reduce((total, prod) => {
-                return total + prod.total
-            }, 0);
-        }
+export const useCartStore = defineStore("cart", {
+  state: () => ({
+    cart: [],
+    countProduct: 0,
+  }),
+  getters: {
+    getCartList(state) {
+      return state.cart.map((prod) => {
+        const myProd = { ...prod };
+        myProd.total = prod.quantity * prod.price;
+        return myProd;
+      });
     },
-    actions: {
-        initializeGallery() {
-            this.gallery = galeria;
-        },
-        // addProductCart(product) {
-        //     const exist = this.cart.some(prod => prod.id == product.id);
-        //     if (!exist) {
-        //         this.cart.push(product);
-        //     } else {
-        //         this.cart.forEach(prod => {
-        //             if (prod.id == product.id) {
-        //                 prod.count += 1
-        //             }
-        //         })
+    cartTotalProducts(state) {
+      return state.cart.reduce((total, prod) => total + prod.quantity, 0);
+    },
+    cartTotalPrice() {
+      return this.getCartList.reduce((total, prod) => total + prod.total, 0);
+    },
+    cartCount(state) {
+      return state.cart.length;
+    },
+  },
+  actions: {
+    addProductToCart(product) {
+      const existingProduct = this.cart.find(
+        (prod) => prod.id === product.id && prod.withFrame === product.withFrame
+      );
 
-        //     }
-        // },
-        addProductCart(product){
-            //agregar una propiedad "withMarco" que refleja si el usuario quiere el producto con marco o no
-            const existingProductIndex = this.cart.findIndex((prod) =>{
-                prod.id === prod.id && prod.withMarco === product.withMarco
-            });
-            if (existingProductIndex !== -1){
-                this.cart[existingProductIndex].count += product.count;
-            }else{
-                this.cart.push({...product})
-            }
-        },
-        removeProductCart(idProduct) {
-            const index = this.cart.findIndex(prod => prod.id == idProduct)
-            this.cart.splice(index, 1)
-        },
-
-        addStockCart(idProduct) {
-            this.cart.forEach(prod => {
-                if (prod.id == idProduct) {
-                    prod.count += 1
-                }
-            })
-        },
-
-        removeStockCart(idProduct) {
-            this.cart.forEach(prod => {
-                if (prod.id == idProduct && prod.count > 1) {
-                    prod.count -= 1
-                }
-            })
-        },
-        getIlustrationById (id){
-            return this.gallery.ilustrations.find(ilustration => ilustration.id == id)
-          }   
-    }
-
-})
+      if (existingProduct) {
+        existingProduct.quantity += product.quantity;
+      } else {
+        this.cart.push(product);
+      }
+      this.countProduct += product.quantity;
+    },
+    removeProductCart({ id, withFrame }) {
+      const productIndex = this.cart.findIndex(
+        (prod) => prod.id === id && prod.withFrame === withFrame
+      );
+      if (productIndex !== -1) {
+        this.cart.splice(productIndex, 1);
+      }
+    },
+    addStockCart({ id, withFrame }) {
+      const productIndex = this.cart.findIndex(
+        (prod) => prod.id === id && prod.withFrame === withFrame
+      );
+      if (productIndex !== -1) {
+        this.cart[productIndex].quantity += 1;
+      }
+    },
+    subtractStockCart({ id, withFrame }) {
+      const productIndex = this.cart.findIndex(
+        (prod) =>
+          prod.id === id && prod.withFrame === withFrame && prod.quantity > 1
+      );
+      if (productIndex !== -1) {
+        this.cart[productIndex].quantity -= 1;
+      }
+    },
+  },
+});
