@@ -2,10 +2,14 @@
     <div>
         <v-navigation-drawer temporary location="left" absolute app v-model="drawer" color="primary">
             <v-layout class="mt-4 d-flex flex-column text-right">
-                <div class="d-flex justify-left">
+                <div class="d-flex justify-space-between">
                     <v-img :src="props.logoOne" max-height="80" max-width="100" contain>
                     </v-img>
+                    <v-btn color="transparent" elevation="0" @click="closeDrawer">
+                        <v-icon icon="mdi-close" size="30"></v-icon>
+                    </v-btn>
                 </div>
+                
             </v-layout>
 
             <!-- Hover Menu Mobile -->
@@ -53,6 +57,9 @@ const props =defineProps({
 
 const toggleButton = () => {
     drawer.value = !drawer.value
+}
+const closeDrawer = () => {
+    drawer.value = false
 }
 
 
