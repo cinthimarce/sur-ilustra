@@ -14,7 +14,7 @@
 
             <!-- Hover Menu Mobile -->
             <v-list>
-                <v-list-item v-for="(item, index) in props.itemsNav" :key="index" :value="item" color="denary" :to="item.to">
+                <v-list-item v-for="(item, index) in props.itemsNav" :key="index" :value="item" color="" :to="item.to">
                     <template v-slot:prepend>
                         <v-icon :icon="item.icon"></v-icon>
                     </template>
@@ -51,8 +51,16 @@ import { ref, defineProps } from 'vue'
 const drawer = ref(false)
 const props =defineProps({
     itemsNav: Object,
-    logoOne: String,
-    LogoTwo: String,
+    //logoOne: String,
+    //LogoTwo: String,
+    logoOne:{
+        required: false,
+        type: String
+    },
+    LogoTwo:{
+        required: false,
+        type: String
+    }
 })
 
 const toggleButton = () => {

@@ -4,7 +4,7 @@
         <AboutComp/>
       </template>
     </MainLayout>
-  </template>
+</template>
    
   <script setup>
 

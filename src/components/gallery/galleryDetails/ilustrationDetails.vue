@@ -164,9 +164,6 @@ const rutas = [
 
 onMounted(() => {
     ilustration.value = galleryStore.getIlustrationByTitle(nameIlustration)
-    console.log(ilustrationId);
-    console.log(nameIlustration);
-    console.log(ilustration.value);
 })
 </script>
 

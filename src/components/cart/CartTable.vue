@@ -7,15 +7,15 @@
                 </th>
             </tr>
         </thead>
-        <tbody class=" text-table ">
-            <tr v-for="item in listStore" :key="item.name" class="my-8">
-                <td class=" py-3  "><v-img :src="require(`@/assets/${item.image}`)" width="120"></v-img></td>
-                <td class=" py-3">{{ item.title }}</td>
-                <td class=" text-center pr-12">{{ item.quantity }}</td>
+        <tbody class="text-table">
+            <tr v-for="(item,index) in listStore" :key="index" class="my-8">
+                <td class="py-3"><v-img :src="require(`@/assets/${item.image}`)" width="120"></v-img></td>
+                <td class="py-3">{{ item.title }}</td>
+                <td class="text-center pr-12">{{ item.quantity }}</td>
                 <td>{{ formatCurrency(item.price) }}</td>
-                <td class=" text-center pr-16">{{ displayWithMarco(item.withFrame) }}</td>
+                <td class="text-center pr-16">{{ displayWithMarco(item.withFrame) }}</td>
                 <td class="">${{ item.total.toLocaleString("es-CL") }}</td>
-                <td>
+                <td transition="scale-transition">
                     <v-icon class="mr-1" @click="subtractProduct(item.id, item.withFrame)">mdi-minus-circle</v-icon>
                     <v-icon class="mr-1" @click="addProduct(item.id,item.withFrame)">mdi-plus-circle</v-icon>
                     <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
@@ -128,5 +128,18 @@ const deleteItemConfirm = () => {
     color: #315467 !important;
     font-family: 'Hepta Slab', serif !important;
     font-size: 1rem;
+}
+.fade-item-enter-active, .fade-item-leave-active {
+  transition: opacity 0.5s, transform 0.5s;
+}
+.fade-item-enter, .fade-item-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+.custom-transition {
+    transition: transform 5s ease-in-out;
+}
+.custom-transition-leave-active {
+    transform: translateY((-100%));
 }
 </style>
