@@ -34,7 +34,29 @@
         </v-navigation-drawer>
 
         <!-- NavBar Mobile Toolbar - MdiMenu navicon-->
-        <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5" @click="toggleButton"><v-icon icon="mdi-home" size="50"></v-icon></v-btn>
+        
+            <div class="toolbar-items">
+                <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5" @click="toggleButton"><v-tooltip activator="parent" location="end">Menu</v-tooltip><v-icon icon="mdi-home" size="50"></v-icon></v-btn>
+                <v-spacer></v-spacer>
+                
+                <v-badge color="red" content="2" class="my-5 mx-5">
+                    <v-btn rounded="xl" color="blue" size="60">
+                        <v-tooltip activator="parent" location="end">alertas</v-tooltip>
+                <v-icon icon="mdi-bell" size="50"></v-icon></v-btn>
+                </v-badge>
+                <v-spacer></v-spacer>
+                <v-badge color="red" content="6" class="my-5 mx-5">
+                    <v-btn rounded="xl" color="blue" size="60">
+                        <v-tooltip activator="parent" location="end">Correos</v-tooltip>
+                <v-icon icon="mdi-gmail" size="50"></v-icon></v-btn>
+                </v-badge>
+                <v-spacer></v-spacer>
+                <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5"><v-tooltip activator="parent" location="end">Cuentas</v-tooltip><v-icon icon="mdi-account-key" size="50"></v-icon></v-btn>
+                <v-spacer></v-spacer>
+                <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5"><v-tooltip activator="parent" location="end">Cerrar Sessión</v-tooltip><v-icon icon="mdi-exit-to-app" size="50"></v-icon></v-btn>
+            </div>
+            
+        
     </div>
 </template>
 
