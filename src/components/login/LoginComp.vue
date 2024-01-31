@@ -6,6 +6,7 @@ import { useRouter } from "vue-router"
 
 const router  = useRouter()
 const visible = ref(false);
+const errorMessage = ref('');
 const email = ref('');
 const emailRules = [
     v => !!v || 'Email es requerido',
@@ -36,14 +37,14 @@ async function login(){
         const auth = getAuth();
         try {
             const userCredentials = await signInWithEmailAndPassword(auth,email.value,pass.value)
-            console.log('Usuario auntenticado:',userCredentials.user)
+            console.log('Usuario autenticado:', userCredentials.user ? userCredentials.user.email : 'Usuario sin correo');
             router.push({name: 'admin'})
         } catch (error) {
             console.error("Error al iniciar sesión:",error.message);
-            alert('Error al iniciar sesión. verifique sus credenciales.')
+            errorMessage.value = 'Error al iniciar sesión. Verifique sus credenciales.';
         }
     } else{
-        alert('Formulario invalido')
+        errorMessage.value = 'Formulario invalido';
     }
 }
 
@@ -80,7 +81,7 @@ async function login(){
                         Forgot login password?</a> -->
                 </div>
 
-                <v-text-field :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'" 
+                <v-text-field :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" 
                     :type="visible ? 'text' : 'password'"
                     density="compact" 
                     v-model="pass"
@@ -91,6 +92,7 @@ async function login(){
                 <v-btn block class="mb-8" color="blue" size="large" variant="tonal" @click="login">
                     Iniciar Sesión
                 </v-btn>
+                <v-alert v-if="errorMessage" type="error" dese outline>{{ errorMessage }}</v-alert>
             </v-card>
             </v-form>
         </div>

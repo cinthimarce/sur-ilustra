@@ -1,12 +1,18 @@
 
 <script setup>
 
-import { ref, computed, onMounted} from 'vue'
+import { ref, computed, onMounted,onUnmounted} from 'vue'
 import { useGaleriaStore } from '@/stores/galeria.js'
 import { getAuth } from 'firebase/auth';
 // Reactive Values
 const auth = getAuth()
-const currentUser = auth.currentUser
+const currentUser = ref(auth.currentUser ? auth.currentUser.email : null);
+
+//Actualizar el valor de CurrentUser cuando cambia la autenticación 
+const unSubscribe = auth.onAuthStateChanged((user) =>{
+    currentUser.value = user ? user.email : null;
+})
+
 const galeriaStore = useGaleriaStore()
 const dialog = ref(false)
 const dialogDelete = ref(false)
@@ -89,6 +95,9 @@ const formTitle = computed(() => {
 onMounted(() => {
     initialize();
 })
+onUnmounted(() =>{
+    unSubscribe();
+})
 // Methods
 const initialize = () =>{
 
@@ -97,7 +106,7 @@ const initialize = () =>{
 <!-- eslint-disable vue/valid-v-slot -->
 <template>
     <div class="contenedor">
-        <h1 class="titulo">Bienvenido usuario: <span class="user">{{ currentUser.email }}</span></h1>
+        <h1 class="titulo">Bienvenido usuario: <span class="user">{{ currentUser }}</span></h1>
     </div>
     <v-container>
         <v-data-table :headers="headers" :items="desserts" :sort-by="[{ key: 'calories', order: 'asc' }]">
