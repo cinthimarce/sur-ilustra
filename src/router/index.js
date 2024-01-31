@@ -8,6 +8,8 @@ import ContactView from '../views/ContactView.vue'
 import AvecillasView from '@/views/AvecillasView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import AdminView from '../views/AdminView.vue'
+import LoginView from '@/views/LoginView.vue'
+import { getAuth } from 'firebase/auth'
 
 
 const routes = [
@@ -58,16 +60,49 @@ const routes = [
   {
     path: '/admin',
     name: 'admin',
-    component: AdminView
+    component: AdminView,
+    meta:{
+      privated: true
+    }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView,
   }
-
-
-
 ]
  
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
- 
+// router.beforeEach((to,from,next) =>{
+//   console.log(to,from,next)
+//   const auth = getAuth()
+//   let user = auth.currentUser
+//   let private_rute = to.meta.privated
+
+//   if(private_rute && !user){
+//     next('/login')
+//   }
+//   else if(private_rute === undefined && user){
+//     next('/admin')
+//   }
+//   else{
+//     next()
+//   }
+// })
+router.beforeEach((to,from,next) =>{
+  const auth = getAuth()
+  let currentUser = auth.currentUser
+  let private_rute = to.matched.some(record => record.meta.privated)
+
+  if (private_rute && !currentUser){
+    next('/login')
+  }else if(to.name === 'login' && currentUser){
+    next('/admin')
+  }else{
+    next()
+  }
+})
 export default router

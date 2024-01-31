@@ -4,14 +4,18 @@ import router from './router'
 import { createPinia } from 'pinia'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
-
-const pinia = createPinia()
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 loadFonts()
-
-createApp(App)
+const auth = getAuth()
+const pinia = createPinia()
+onAuthStateChanged(auth, ()=>{
+  createApp(App)
   .use(router)
   .use(pinia)
   .use(vuetify)
   .mount('#app')
+})
+
+
 

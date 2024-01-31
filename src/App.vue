@@ -6,8 +6,11 @@
  
 <script setup>
   import { useGalleryStore } from "@/stores/gallery.js";
+//import { useProductosStore } from "./stores/productos";
 const galleryStore = useGalleryStore()
 galleryStore.initializeGallery()
+//const productosStore = useProductosStore()
+//productosStore.initializeProducts()
 </script>
 
 <style>

@@ -1,14 +1,16 @@
 <template>
     <AdminLayout>
         <template #admin>
-            <AdminTable/>
+            <!-- <AdminTable/> -->
+            <AdminForm/>
         </template>
     </AdminLayout>
 </template>
 
 <script setup>
 import AdminLayout from '@/layouts/AdminLayout.vue';
-import AdminTable from '@/components/admin/AdminTable.vue';
+//import AdminTable from '@/components/admin/AdminTable.vue';
+import AdminForm from '@/components/admin/AdminForm.vue';
 import {} from 'vue'
     
 </script>

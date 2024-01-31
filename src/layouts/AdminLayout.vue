@@ -3,7 +3,7 @@
         <div class="admin-nav-bar">
             <NavBarAdmin/>
         </div>
-        <div class="slot">
+        <div class="slot-admin">
             <slot name="admin"/>
         </div>
     </div>
@@ -19,10 +19,11 @@ import NavBarAdmin from '@/components/navBar/NavBarAdmin.vue';
     display: grid;
     grid-template-columns: 10% 90%;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     inset: 0;
     background: radial-gradient(125% 125% at 50% 10%,#000 40%,#63e 100%);
 }
+
 
 
 </style>
