@@ -1,21 +1,37 @@
 
 <script setup>
-
-import { ref, computed, onMounted,onUnmounted} from 'vue'
-import { useGaleriaStore } from '@/stores/galeria.js'
+import CardLoader from './CardLoader.vue';
+import SnackbarMessage from './SnackbarMessage.vue';
+import { ref, reactive, computed, onMounted, onUnmounted } from 'vue';
+import { useGaleriaStore } from '@/stores/galeria.js';
 import { getAuth } from 'firebase/auth';
+import { db } from '@/firebase/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+
+
+
 // Reactive Values
+
 const auth = getAuth()
 const currentUser = ref(auth.currentUser ? auth.currentUser.email : null);
 
 //Actualizar el valor de CurrentUser cuando cambia la autenticación 
-const unSubscribe = auth.onAuthStateChanged((user) =>{
+const unSubscribe = auth.onAuthStateChanged((user) => {
     currentUser.value = user ? user.email : null;
 })
 
-const galeriaStore = useGaleriaStore()
-const dialog = ref(false)
-const dialogDelete = ref(false)
+const galeriaStore = useGaleriaStore();
+const productos = ref([]);
+const dialog = ref(false);
+const dialogDelete = ref(false);
+const search = ref('');
+const snackbarColor = ref('');
+const snackbarText = ref('');
+const snackbaricon = ref(''); 
+const snackbar = ref(false)
+const loading = ref(false);
+const editedIndex = ref(-1);
+const categoriaItems = ['Ilustración', 'Avecillas', 'Esculturas'];
 const headers = [
     {
         title: 'ID',
@@ -26,63 +42,59 @@ const headers = [
     { title: 'Imagen', key: 'imagen' },
     { title: 'Nombre', key: 'nombre' },
     { title: 'Subtitulo', key: 'subtitulo' },
-    { title: 'Tamaño', key: 'tamanio' },
+    { title: 'Dimensiones', key: 'dimensiones' },
     { title: 'Precio', key: 'precio' },
     { title: 'Precio Marco', key: 'precioMarco' },
-    { title: 'descripción', key: 'descripcion' },
+    { title: 'Categoria', key: 'categoria' },
     { title: 'Acciones', key: 'actions', sortable: false },
-]
-const desserts = ref([])
-const editedIndex = ref(-1)
-const editedItem = ref({
-    imagen1: '',
-    imagen2: '',
+];
+
+const editedItem = {
     nombre: '',
     subtitulo: '',
     precio: '',
     precioMarco: '',
     descripcion: '',
-    tamanio: '',
-    categoria: ''
-})
-const mostrarFormulario = () =>{
-    dialog.value = true
-    editedItem.value = {
-        imagen1: '',
-        imagen2: '',
-        nombre: '',
-        subtitulo: '',
-        precio: '',
-        precioMarco: '',
-        descripcion: '',
-        tamanio: '',
-        categoria: ''
+    dimensiones: '',
+    categoria: '',
+    imagen1: null,
+    imagen2: null,
+};
+const state = reactive({ ...editedItem })
+// Obtener los productos para mostrarlos en el data table
+const cargarProductos = async () => {
+    try {
+        const querySnapshot = await getDocs(collection(db, 'productos'));
+        productos.value = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        console.log("productos cargados con éxito")
+    } catch (error) {
+        console.error("Error al obtener los productos:", error)
     }
+};
+const mostrarFormulario = () => {
+    dialog.value = true
+
+    state.nombre = '';
+    state.subtitulo = '';
+    state.precio = '';
+    state.precioMarco = '';
+    state.descripcion = '';
+    state.dimensiones = '';
+    state.categoria = '';
+    state.imagen1 = null;
+    state.imagen2 = null;
+    //state.value = {...editedItem}
     editedIndex.value = -1
-}
-const close = () =>{ 
-    dialog.value = false
-}
-const save = async () =>{
-   try {
-    const imagenes = [
-      { name: 'nombre_imagen1.jpg', file: editedItem.value.imagen1[0] },
-      { name: 'nombre_imagen2.jpg', file: editedItem.value.imagen2[0] },
-    ];
-
-    // Llamar a la función agregarProducto del store
-    await galeriaStore.agregarProducto({
-      ...editedItem.value,
-      // Asegúrate de ajustar las propiedades según tu modelo de datos
-      imagenes,
-    });
-
-    // Otras acciones después de guardar, si es necesario
-    close();
-    alert('producto enviado')
-   } catch (error) {
-    console.error('Error al guardar el producto:', error);
-   }
+    // console.log(productos.value)
+    // console.log(state.value)
+    mostrarSnackbar('Producto Agregado con Éxito','green','mdi-check-circle');
+    console.log(snackbarText.value);
+    console.log(snackbarColor.value);
+    console.log(snackbar.value);
+    console.log(snackbaricon.value)
 }
 
 // Computed Properties
@@ -90,18 +102,97 @@ const formTitle = computed(() => {
     return editedIndex.value === -1 ? 'Nuevo Item' : 'Editar Item'
 })
 // Watchers
+// Methods
+
+const editarFormulario = (producto) => {
+    // llenar el formulario con los datos del producto que se está editando
+    state.nombre = producto.nombre;
+    state.subtitulo = producto.subtitulo;
+    state.precio = producto.precio;
+    state.precioMarco = producto.precioMarco;
+    state.descripcion = producto.descripcion;
+    state.dimensiones = producto.dimensiones;
+    state.categoria = producto.categoria;
+
+    // Verificar si el producto tienen imágenes antes de asignar valores
+    state.imagen1 = null;
+    state.imagen2 = null;
+    dialog.value = true;
+    editedIndex.value = producto.id;
+    mostrarSnackbar('Error al agregar el producto', 'red','mdi-alert-circle')
+}
+
+const close = () => {
+    dialog.value = false
+    state.value = { ...editedItem }
+    editedIndex.value = -1
+}
+//snackbar
+const mostrarSnackbar = (texto,color,icon) =>{
+    snackbarText.value = texto;
+    snackbarColor.value = color;
+    snackbaricon.value = icon;
+    snackbar.value = true;
+}
+const crearProducto = async () => {
+    try {
+        loading.value = true;
+        await galeriaStore.createProducto(state)
+        
+    } catch (error) {
+        console.error('Error al crear el Producto:', error)
+        mostrarSnackbar('Error al agregar el producto', 'red')
+        
+    } finally {
+        loading.value = false;
+        cargarProductos();
+        mostrarSnackbar('Producto Agregado con Éxito','green');
+        
+    }
+}
+const enviarFormulario = async () => {
+    if (editedIndex.value === -1) {
+        crearProducto()
+
+        //console.log('Producto enviado con exito');
+    } else {
+        galeriaStore.editarProducto({ id: editedIndex.value, nuevoProducto: { ...state } })
+        state.value = { ...editedItem }
+    }
+
+    close()
+};
+
+// Funciones para eliminar Productos
+
+const deleteItem = (item) => {
+    editedIndex.value = item.id;
+    dialogDelete.value = true;
+}
+const closeDelete = () => {
+    dialogDelete.value = false;
+}
+const deleteItemConfirm = () => {
+    try {
+        galeriaStore.eliminarProducto(editedIndex.value);
+        dialogDelete.value = false;
+        console.log("Elemento eliminado con éxito")
+        cargarProductos();
+
+    } catch (error) {
+        console.log("Error al eliminar el producto:", error);
+    }
+}
 
 // Lifecycle hooks
 onMounted(() => {
-    initialize();
+    cargarProductos();
 })
-onUnmounted(() =>{
+onUnmounted(() => {
     unSubscribe();
 })
-// Methods
-const initialize = () =>{
 
-}
+
 </script>
 <!-- eslint-disable vue/valid-v-slot -->
 <template>
@@ -109,16 +200,20 @@ const initialize = () =>{
         <h1 class="titulo">Bienvenido usuario: <span class="user">{{ currentUser }}</span></h1>
     </div>
     <v-container>
-        <v-data-table :headers="headers" :items="desserts" :sort-by="[{ key: 'calories', order: 'asc' }]">
+        <v-data-table :headers="headers" :items="productos" :sort-by="[{ key: 'categoria', order: 'asc' }]">
             <template v-slot:top>
-                <v-toolbar flat>
+                <v-toolbar flat color="blue">
                     <v-toolbar-title>Mis Productos</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
-
+                    <v-text-field v-model="search" prepend-inner-icon="mdi-magnify" density="compact" label="Search"
+                        single-line flat hide-details variant="solo-filled"></v-text-field>
+                    <v-divider class="mx-4" inset vertical></v-divider>
+                    <v-spacer></v-spacer>
                     <v-dialog v-model="dialog" max-width="800px">
                         <template v-slot:activator="{ props }">
-                            <v-btn color="black" dark prepend-icon="mdi-plus" class="mb-2" v-bind="props" @click="mostrarFormulario">
+                            <v-btn color="black" dark prepend-icon="mdi-plus" class="mb-2" v-bind="props"
+                                @click="mostrarFormulario">
                                 Nuevo Producto
                             </v-btn>
                         </template>
@@ -131,36 +226,34 @@ const initialize = () =>{
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="editedItem.nombre" label="nombre"></v-text-field>
+                                            <v-text-field v-model="state.nombre" label="nombre"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="editedItem.subtitulo" label="subtitulo"></v-text-field>
+                                            <v-text-field v-model="state.subtitulo" label="subtitulo"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="editedItem.precio" label="precio"></v-text-field>
+                                            <v-text-field v-model="state.precio" label="precio"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="editedItem.precioMarco" label="precio Marco"></v-text-field>
+                                            <v-text-field v-model="state.precioMarco" label="precio Marco"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-file-input v-model="editedItem.imagen1" 
-                                            prepend-icon="mdi-camera" label="Primera Imagen"></v-file-input>
+                                            <v-file-input v-model="state.imagen1" prepend-icon="mdi-camera"
+                                                label="Primera Imagen"></v-file-input>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-file-input v-model="editedItem.imagen2" 
-                                            prepend-icon="mdi-camera" label="Segunda Imagen"></v-file-input>
+                                            <v-file-input v-model="state.imagen2" prepend-icon="mdi-camera"
+                                                label="Segunda Imagen"></v-file-input>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="editedItem.tamanio" label="tamaño"></v-text-field>
+                                            <v-text-field v-model="state.dimensiones" label="tamaño"></v-text-field>
                                         </v-col>
-                                        <v-select
-                                        label="Categoria"
-                                        v-model="editedItem.categoria"
-                                        :items="['Ilustraciones','Avecillas','Esculturas']"></v-select>
+                                        <v-select name="categoria" label="Categoria" v-model="state.categoria"
+                                            :items="categoriaItems"></v-select>
                                         <v-col cols="12" sm="6" md="12">
-                                            <v-textarea v-model="editedItem.descripcion" label="descripcion"></v-textarea>
+                                            <v-textarea v-model="state.descripcion" label="descripcion"></v-textarea>
                                         </v-col>
-                                        
+
                                     </v-row>
                                 </v-container>
                             </v-card-text>
@@ -170,7 +263,7 @@ const initialize = () =>{
                                 <v-btn color="blue-darken-1" variant="text" @click="close">
                                     Cancelar
                                 </v-btn>
-                                <v-btn color="blue-darken-1" variant="text" @click="save">
+                                <v-btn color="blue-darken-1" variant="text" @click="enviarFormulario">
                                     Guardar
                                 </v-btn>
                             </v-card-actions>
@@ -190,30 +283,32 @@ const initialize = () =>{
                 </v-toolbar>
             </template>
             <template v-slot:item.actions="{ item }">
-                <v-icon size="small" color="blue" class="me-2" @click="editItem(item)">
+                <v-icon size="small" color="blue" class="me-2" @click="editarFormulario(item)">
                     mdi-pencil
                 </v-icon>
                 <v-icon size="small" color="red" @click="deleteItem(item)">
                     mdi-delete
                 </v-icon>
             </template>
-            <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">
-                    Reset
-                </v-btn>
-            </template>
         </v-data-table>
+        <div>
+            <card-loader :loading="loading"/>
+            <snackbar-message :color="snackbarColor" :icon="snackbaricon" :message="snackbarText" :snackbar="snackbar"/>
+        </div>
     </v-container>
 </template>
 
 <style scoped>
-.titulo{
+.titulo {
     color: aliceblue;
     text-align: center;
     margin-top: 30px;
     padding: 20px;
 }
-.user{
-        color: aqua;
-    }
+
+.user {
+    color: aqua;
+}
+
+
 </style>
