@@ -7,6 +7,7 @@ import { useGaleriaStore } from '@/stores/galeria.js';
 import { getAuth } from 'firebase/auth';
 import { db } from '@/firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
+//import { formatCurrency } from '../gallery/base/FormatCurrent';
 
 
 
@@ -27,9 +28,10 @@ const dialogDelete = ref(false);
 const search = ref('');
 const snackbarColor = ref('');
 const snackbarText = ref('');
-const snackbaricon = ref(''); 
+const snackbaricon = ref('');
 const snackbar = ref(false)
 const loading = ref(false);
+const loadingActions = ref('');
 const editedIndex = ref(-1);
 const categoriaItems = ['Ilustración', 'Avecillas', 'Esculturas'];
 const headers = [
@@ -52,8 +54,8 @@ const headers = [
 const editedItem = {
     nombre: '',
     subtitulo: '',
-    precio: '',
-    precioMarco: '',
+    precio: null,
+    precioMarco: null,
     descripcion: '',
     dimensiones: '',
     categoria: '',
@@ -90,19 +92,13 @@ const mostrarFormulario = () => {
     editedIndex.value = -1
     // console.log(productos.value)
     // console.log(state.value)
-    mostrarSnackbar('Producto Agregado con Éxito','green','mdi-check-circle');
-    console.log(snackbarText.value);
-    console.log(snackbarColor.value);
-    console.log(snackbar.value);
-    console.log(snackbaricon.value)
+
 }
 
 // Computed Properties
 const formTitle = computed(() => {
     return editedIndex.value === -1 ? 'Nuevo Item' : 'Editar Item'
 })
-// Watchers
-// Methods
 
 const editarFormulario = (producto) => {
     // llenar el formulario con los datos del producto que se está editando
@@ -119,7 +115,6 @@ const editarFormulario = (producto) => {
     state.imagen2 = null;
     dialog.value = true;
     editedIndex.value = producto.id;
-    mostrarSnackbar('Error al agregar el producto', 'red','mdi-alert-circle')
 }
 
 const close = () => {
@@ -128,39 +123,87 @@ const close = () => {
     editedIndex.value = -1
 }
 //snackbar
-const mostrarSnackbar = (texto,color,icon) =>{
+const mostrarSnackbar = (texto, tipoAccion) => {
+    let color = '';
+    let icon = '';
+
+    switch (tipoAccion) {
+        case 'creacion':
+            color = 'green';
+            icon = 'mdi-check-circle';
+            break;
+        case 'edicion':
+            color = 'blue';
+            icon = 'mdi-refresh-circle';
+            break;
+        case 'eliminacion':
+            color = 'yellow';
+            icon = 'mdi-delete-circle';
+            break
+        default:
+            color = 'red';
+            icon = 'mdi-alert-circle';
+    }
+
     snackbarText.value = texto;
     snackbarColor.value = color;
     snackbaricon.value = icon;
     snackbar.value = true;
+
+    setTimeout(() => {
+        snackbar.value = false;
+    }, 3000);
 }
 const crearProducto = async () => {
     try {
         loading.value = true;
+        loadingActions.value = 'agregar'
         await galeriaStore.createProducto(state)
-        
+        mostrarSnackbar('Producto Agregado con Éxito', 'creacion');
     } catch (error) {
         console.error('Error al crear el Producto:', error)
-        mostrarSnackbar('Error al agregar el producto', 'red')
-        
+        mostrarSnackbar('Error al agregar el producto', 'error')
+
     } finally {
         loading.value = false;
         cargarProductos();
-        mostrarSnackbar('Producto Agregado con Éxito','green');
-        
+    }
+}
+const editarProducto = async () => {
+    try {
+        loading.value = true;
+        loadingActions.value = 'editar'
+        await galeriaStore.editarProducto({ id: editedIndex.value, nuevoProducto: { ...state } });
+    } catch (error) {
+        console.error('Error al editar el Producto:', error);
+        mostrarSnackbar('Error al editar el producto', 'error');
+    } finally {
+        loading.value = false;
+        cargarProductos();
+        mostrarSnackbar('Producto editado con éxito', 'edicion')
     }
 }
 const enviarFormulario = async () => {
-    if (editedIndex.value === -1) {
-        crearProducto()
+    try {
+        // Validar que todos los campos estén completos
+        if (!state.nombre || !state.subtitulo || !state.precio || !state.precioMarco || !state.imagen1 || !state.imagen2 || !state.dimensiones || !state.categoria || !state.descripcion) {
+            mostrarSnackbar('Por favor complete todos los campos', 'red');
+            return;
+        }
+        if (editedIndex.value === -1) {
+            crearProducto()
 
-        //console.log('Producto enviado con exito');
-    } else {
-        galeriaStore.editarProducto({ id: editedIndex.value, nuevoProducto: { ...state } })
-        state.value = { ...editedItem }
-    }
-
+            //console.log('Producto enviado con exito');
+        } else {
+            editarProducto()
+        }
+    } catch (error) {
+        console.error('Error al enviar el formulario:', error);
+        mostrarSnackbar('Error al enviar el formulario', 'error');
+    } 
     close()
+
+
 };
 
 // Funciones para eliminar Productos
@@ -172,15 +215,20 @@ const deleteItem = (item) => {
 const closeDelete = () => {
     dialogDelete.value = false;
 }
-const deleteItemConfirm = () => {
+const deleteItemConfirm = async () => {
     try {
-        galeriaStore.eliminarProducto(editedIndex.value);
+        await galeriaStore.eliminarProducto(editedIndex.value);
         dialogDelete.value = false;
+        loading.value = true;
+        loadingActions.value = 'eliminar'
         console.log("Elemento eliminado con éxito")
         cargarProductos();
 
     } catch (error) {
         console.log("Error al eliminar el producto:", error);
+    } finally {
+        loading.value = false;
+        mostrarSnackbar('Producto eliminado con éxito', 'eliminacion')
     }
 }
 
@@ -221,39 +269,46 @@ onUnmounted(() => {
                             <v-card-title>
                                 <span class="text-h5">{{ formTitle }}</span>
                             </v-card-title>
-
                             <v-card-text>
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="state.nombre" label="nombre"></v-text-field>
+                                            <v-text-field v-model="state.nombre" label="nombre"
+                                                :rules="[v => !!v || 'El nombre es obligatorio']"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="state.subtitulo" label="subtitulo"></v-text-field>
+                                            <v-text-field v-model="state.subtitulo" label="subtitulo"
+                                                :rules="[v => !!v || 'El subtitulo es obligatorio']"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="state.precio" label="precio"></v-text-field>
+                                            <v-text-field label="precio" v-model="state.precio"
+                                                :rules="[v => !!v || 'El precio es obligatorio', v => /^\d+(\.\d{1,2})?$/.test(v) || 'El precio debe ser un número válido']"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="state.precioMarco" label="precio Marco"></v-text-field>
+                                            <v-text-field v-model="state.precioMarco" label="precio Marco"
+                                                :rules="[v => !!v || 'El precio del marco es obligatorio', v => /^\d+(\.\d{1,2})?$/.test(v) || 'El precio del marco debe ser un número válido']"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
                                             <v-file-input v-model="state.imagen1" prepend-icon="mdi-camera"
-                                                label="Primera Imagen"></v-file-input>
+                                                label="Primera Imagen"
+                                                :rules="[v => !!v || 'La primera imagen es obligatoria']"></v-file-input>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
                                             <v-file-input v-model="state.imagen2" prepend-icon="mdi-camera"
-                                                label="Segunda Imagen"></v-file-input>
+                                                label="Segunda Imagen"
+                                                :rules="[v => !!v || 'La segunda imagen es obligatoria']"></v-file-input>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field v-model="state.dimensiones" label="tamaño"></v-text-field>
+                                            <v-text-field v-model="state.dimensiones" label="tamaño"
+                                                :rules="[v => !!v || 'Las dimensiones son obligatoria']"></v-text-field>
                                         </v-col>
                                         <v-select name="categoria" label="Categoria" v-model="state.categoria"
-                                            :items="categoriaItems"></v-select>
+                                            :items="categoriaItems"
+                                            :rules="[v => !!v || 'La categoría es obligatoria']"></v-select>
                                         <v-col cols="12" sm="6" md="12">
-                                            <v-textarea v-model="state.descripcion" label="descripcion"></v-textarea>
+                                            <v-textarea v-model="state.descripcion" label="descripcion"
+                                                :rules="[v => !!v || 'La descripción es obligatoria']"></v-textarea>
                                         </v-col>
-
                                     </v-row>
                                 </v-container>
                             </v-card-text>
@@ -292,8 +347,8 @@ onUnmounted(() => {
             </template>
         </v-data-table>
         <div>
-            <card-loader :loading="loading"/>
-            <snackbar-message :color="snackbarColor" :icon="snackbaricon" :message="snackbarText" :snackbar="snackbar"/>
+            <card-loader :loading="loading" :actions="loadingActions" />
+            <snackbar-message :color="snackbarColor" :icon="snackbaricon" :message="snackbarText" :snackbar="snackbar" />
         </div>
     </v-container>
 </template>
@@ -308,7 +363,4 @@ onUnmounted(() => {
 
 .user {
     color: aqua;
-}
-
-
-</style>
+}</style>

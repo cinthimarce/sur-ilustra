@@ -1,15 +1,27 @@
 <script setup >
 
-import { defineProps } from 'vue'
+import { defineProps,computed } from 'vue'
 
 // Reactive Values
-defineProps({
+const props = defineProps({
     loading: Boolean,
-    cardText:String
+    actions:String
 })
 
-// Computed Properties
 
+// Computed Properties
+const cardText = computed(() =>{
+    switch (props.actions) {
+        case 'agregar':
+            return 'Agregando Producto...'
+        case 'editar':
+            return 'Editando Producto...'
+        case 'eliminar':
+            return 'Eliminar Producto...'
+        default:
+            return '';
+    }
+})
 // Watchers
 
 // Lifecycle hooks
@@ -17,7 +29,7 @@ defineProps({
 </script>
 
 <template>
-    <v-overlay :model-value="loading" class="align-center justify-center" color="rgba(255, 255, 255, 0.6)">
+    <v-overlay :model-value="props.loading" class="align-center justify-center" color="rgba(255, 255, 255, 0.6)">
         <v-card class="custom-card">
                 <v-card-title primary-title class="text-center" color="primary" elevation-12>
                     <span class="headline mb-4">{{ cardText }}</span>
