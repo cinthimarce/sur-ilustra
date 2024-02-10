@@ -96,7 +96,7 @@ const closeDelete = () => {
     dialogDelete.value = false;
 };
 const deleteItemConfirm = () => {
-    cartStore.removeProductCart({ id: deleteId.value,    withFrame: deleteWithFrame.value });
+    cartStore.removeProductCart({ id: deleteId.value, withFrame: deleteWithFrame.value });
     dialogDelete.value = false
 };
 
