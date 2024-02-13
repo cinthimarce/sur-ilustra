@@ -5,7 +5,7 @@
                     <v-hover v-slot="{ isHovering, props }">
                         <v-card :elevation="isHovering ? 12 : 2" :class="{ 'on-hover': isHovering }" v-bind="props"
                             class="transparent">
-                            <v-img :src="require(`@/assets/${producto.image}`)" height="310px" cover @click="redirectTo(producto.title,producto.id)">
+                            <v-img :src="producto.imagen1" height="310px" cover @click="redirectTo(producto.title)">
                                 <div class="align-self-center">
                                     <v-card-title class="text-h6 text-transparent d-flex flex-column align-center"
                                         :class="{ 'show-btns': isHovering }" :color="transparent">
@@ -59,8 +59,8 @@ defineProps({
 const emit = defineEmits('redirectTo')
 
 
-const redirectTo = (title,id) => {
-  emit('redirectTo', title ,id);
+const redirectTo = (title) => {
+  emit('redirectTo', title);
 };
 
 </script>
