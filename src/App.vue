@@ -5,12 +5,13 @@
 </template>
  
 <script setup>
-  import { useGalleryStore } from "@/stores/gallery.js";
-//import { useProductosStore } from "./stores/productos";
+import { useGalleryStore } from "@/stores/gallery.js";
+import { useGaleriaStore } from "./stores/galeria.js";
 const galleryStore = useGalleryStore()
 galleryStore.initializeGallery()
-//const productosStore = useProductosStore()
-//productosStore.initializeProducts()
+const galeriaStore = useGaleriaStore()
+galeriaStore.getProductos()
+
 </script>
 
 <style>

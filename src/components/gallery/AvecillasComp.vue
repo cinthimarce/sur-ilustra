@@ -7,15 +7,17 @@
 
 <script setup>
 import BaseGallery from './base/BaseGallery.vue';
-import { useGalleryStore } from '@/stores/gallery';
+// import { useGalleryStore } from '@/stores/gallery';
+import { useGaleriaStore } from '@/stores/galeria';
 import BreadcrumbsComp from './base/BreadcrumbsComp.vue';
 import { useRouter } from 'vue-router';
 
 
 const route = useRouter()
-
-const galleryStore = useGalleryStore()
-const avecillas = galleryStore.gallery.avecillas
+const galeriaStore = useGaleriaStore()
+const avecillas = galeriaStore.avecillasGalery
+// const galleryStore = useGalleryStore()
+// const avecillas = galleryStore.gallery.avecillas
 
 const redirectIlustration = (id) => {
     route.push(`/ilustration/${id}`)

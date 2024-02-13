@@ -19,12 +19,12 @@ import { db, storage } from "@/firebase/firebase.js";
 
 export const useGaleriaStore = defineStore("galeria", {
   state: () => ({
-    // productos: {
-    //   ilustraciones: [],
-    //   avecillas: [],
-    //   scultures: [],
-    // },
-    productos: [],
+    productos: {
+      ilustraciones: [],
+      avecillas: [],
+      scultures: [],
+    },
+    //productos: [],
   }),
   getters: {
     ilustrationsGalery(state) {
@@ -42,11 +42,25 @@ export const useGaleriaStore = defineStore("galeria", {
     async getProductos() {
       try {
         // Limpiar los datos antiguos
-        this.productos = [];
+        //this.productos = [];
+        // Limpiar los datos antiguos
+        this.productos = {
+          ilustraciones: [],
+          avecillas: [],
+          esculturas: [],
+        };
         const querySnapshot = await getDocs(collection(db, "productos"));
         querySnapshot.forEach((doc) => {
           const producto = { id: doc.id, ...doc.data() };
-          this.productos.push(producto);
+          //this.productos.push(producto);
+          // Clasificar productos según su categoría
+          if (producto.categoria === 'Ilustración') {
+            this.productos.ilustraciones.push(producto);
+          } else if (producto.categoria === 'Avecillas') {
+            this.productos.avecillas.push(producto);
+          } else if (producto.categoria === 'Esculturas') {
+            this.productos.scultures.push(producto);
+          }
         });
       } catch (error) {
         console.error("Error al obtener los productos:", error);

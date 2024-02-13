@@ -1,11 +1,11 @@
 <template>
         <v-row class="fill-height" align="center" justify="center">
-            <template v-for="producto in props.productos" :key="producto.id">
+            <template v-for="producto in productos" :key="producto.id">
                 <v-col cols="12" md="4">
                     <v-hover v-slot="{ isHovering, props }">
                         <v-card :elevation="isHovering ? 12 : 2" :class="{ 'on-hover': isHovering }" v-bind="props"
                             class="transparent">
-                            <v-img :src="require(`@/assets/${producto.image}`)" height="310px" cover @click="redirectTo(producto.title,producto.id)">
+                            <v-img :src="producto.imagen1" height="310px" cover @click="redirectTo(producto.nombre)">
                                 <div class="align-self-center">
                                     <v-card-title class="text-h6 text-transparent d-flex flex-column align-center"
                                         :class="{ 'show-btns': isHovering }" :color="transparent">
@@ -22,10 +22,10 @@
                             </v-img>
                             <v-card-text>
                                 <p class="font-weight-light text-septenary text-h6 ma-0">
-                                    {{ producto.title }}
+                                    {{ producto.nombre }}
                                 </p>
                                 <p class="font-weight-medium text-grey subtext-card">
-                                    {{ producto.subtext }}
+                                    {{ producto.subtitulo }}
                                 </p>
                             </v-card-text>
 
@@ -33,7 +33,7 @@
 
                             <v-sheet class="d-flex justify-center mb-4 pt-4">
                                 <v-sheet class="pl-5 text-h5 font-weight-bold text-septenary">{{
-                                    formatCurrency(producto.opciones[0].price)
+                                    formatCurrency(producto.precio)
                                 }}</v-sheet>
                             </v-sheet>
                         </v-card>
@@ -52,7 +52,7 @@ import { formatCurrency } from "./FormatCurrent.js"
 // const route = useRouter()
 const transparent = "rgba(255, 255, 255, 0)";
 
-const props = defineProps({
+defineProps({
     productos: Object,
 })
 
