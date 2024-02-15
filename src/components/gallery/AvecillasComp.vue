@@ -19,8 +19,8 @@ const avecillas = galeriaStore.avecillasGalery
 // const galleryStore = useGalleryStore()
 // const avecillas = galleryStore.gallery.avecillas
 
-const redirectIlustration = (id) => {
-    route.push(`/ilustration/${id}`)
+const redirectIlustration = (nombre) => {
+    route.push(`/avecillas/${nombre}`)
 }
 const rutas = [
     {
@@ -29,7 +29,7 @@ const rutas = [
         to: '/'
     },
     {
-        title: 'Ilustraciones',
+        title: 'Avecillas',
         disabled: true
     }
 ]

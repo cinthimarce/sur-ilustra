@@ -210,46 +210,6 @@ export const useGaleriaStore = defineStore("galeria", {
         throw error;
       }
     },
-
-    // async editarProducto({ id, nuevoProducto }) {
-    //   try {
-    //     // const { nuevaUrlImagen1, nuevaUrlImagen2 } = await this.editarImagenes(
-    //     //   id,
-    //     //   nuevoProducto
-    //     // );
-    //     const nuevasImagenesCargadas = nuevoProducto.imagen1 ||nuevoProducto.imagen2;
-    //     let nuevasUrlsImagenes = {};
-    //     if(nuevasImagenesCargadas){
-    //       nuevasUrlsImagenes = await this.editarImagenes(id,nuevoProducto)
-    //     }
-
-        
-
-    //     // Contruir objeto con los datos actualizados del producto
-    //     const datosActualizados = {
-    //       nombre: nuevoProducto.nombre,
-    //       categoria: nuevoProducto.categoria,
-    //       precio: nuevoProducto.precio,
-    //       precioMarco: nuevoProducto.precioMarco,
-    //       dimensiones: nuevoProducto.dimensiones,
-    //       subtitulo: nuevoProducto.subtitulo,
-    //       descripcion: nuevoProducto.descripcion,
-    //       imagen1:nuevasUrlsImagenes.nuevaUrlImagen1 ||  nuevoProducto.imagen1, // Utilizar la nueva URL si está disponible, de lo contrario, usar la URL existente
-    //       imagen2: nuevasUrlsImagenes.nuevaUrlImagen2 ||  nuevoProducto.imagen2,
-    //     };
-    //     //obtener la referencia al documento del producto
-    //     const productoRef = doc(db, "productos", id);
-    //     // Actualizar el documneto del producto en Firestore
-    //     await updateDoc(productoRef, datosActualizados);
-
-    //     const productoStore = useGaleriaStore();
-    //     await productoStore.getProductos();
-    //     console.log("Producto editado con éxito");
-    //   } catch (error) {
-    //     console.error("Error al tratar de editar el producto:", error);
-    //     throw error;
-    //   }
-    // },
     async editarProducto({ id, nuevoProducto }) {
       try {
         const productoRef = doc(db, "productos", id);
@@ -316,5 +276,12 @@ export const useGaleriaStore = defineStore("galeria", {
         console.error("Error eliminar producto:", error);
       }
     },
+    getIlustrationByTitle(nombre){
+      return this.productos.ilustraciones.find(prod => prod.nombre == nombre)
+    },
+    getAvecillasByTitle(nombre){
+      return this.avecillasGalery.find(prod => prod.nombre == nombre)
+    }
+
   },
 });

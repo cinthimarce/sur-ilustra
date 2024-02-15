@@ -1,20 +1,23 @@
 <template>
-  <v-carousel :show-arrows="false" hide-delimiter-background>
+  <v-carousel :show-arrows="true" hide-delimiter-background>
     <v-carousel-item
-      v-for="(item,i) in props.imageCarousel"
-      :key="i"
-      :src="item.url"
-      
+    :src="props.imageCarousel.imagen1"
+    ></v-carousel-item>
+    <v-carousel-item
+    :src="props.imageCarousel.imagen2"
     ></v-carousel-item>
   </v-carousel>
 </template>
   
 <script setup>
-import {defineProps} from 'vue'
+import {defineProps, onMounted} from 'vue'
 
 const props = defineProps({
   imageCarousel: Object
 })
   
+onMounted(() =>{
+  console.log(props.imageCarousel)
+})
 </script>
   <style scoped></style>

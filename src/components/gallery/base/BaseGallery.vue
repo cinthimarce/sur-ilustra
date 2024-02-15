@@ -5,7 +5,7 @@
                     <v-hover v-slot="{ isHovering, props }">
                         <v-card :elevation="isHovering ? 12 : 2" :class="{ 'on-hover': isHovering }" v-bind="props"
                             class="transparent">
-                            <v-img :src="producto.imagen1" height="310px" cover @click="redirectTo(producto.title)">
+                            <v-img :src="producto.imagen1" height="310px" cover @click="redirectTo(producto.nombre)">
                                 <div class="align-self-center">
                                     <v-card-title class="text-h6 text-transparent d-flex flex-column align-center"
                                         :class="{ 'show-btns': isHovering }" :color="transparent">

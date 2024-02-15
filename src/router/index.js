@@ -39,6 +39,11 @@ const routes = [
     component: AvecillasView
   },
   {
+    path: '/avecillas/:nombre',
+    name:'avecillasDetails',
+    component: () => import('@/views/AvecillasDetailsView.vue')
+  },
+  {
     path: '/scult',
     name: 'scult',
     component: ScultView
