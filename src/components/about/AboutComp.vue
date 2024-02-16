@@ -15,7 +15,7 @@
 
 import { } from 'vue'
 const description =
-    "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+    "Humberto Vera, oriundo de Coyhaique, se caracteriza por ser uno de los mejores acuarelistas de la región Austral de Chile, realizó sus estudios de Pedagogía en Arte en la Universidad de Chile, el año 2012, Humberto mostró un temprano interés por el arte, durante su infancia participó en varios concursos de arte obteniendo los primeros lugares. A la edad de 15 años ya estaba trabajando en una tienda de grabados. Ya como profesional ha realizado varias exposiciones en la Casa de la Cultura de Coyhaique, en la técnica de Acuarela, y se ha desempeñado como profesor y tallerista en distintos establecimientos. ";
 
 </script>
 
