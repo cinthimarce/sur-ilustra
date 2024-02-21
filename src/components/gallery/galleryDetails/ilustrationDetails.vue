@@ -1,131 +1,94 @@
-<template>
-    <v-container>
-        <BreadcrumbsComp :rutas="rutas" />
-        <v-row d-flex>
-            <!-- CARRUSEL MODO MOBILE -->
-            <v-col cols=12 class="d-md-none">
-                <CarruselGalleryMobile :image-carousel="imageCarousel" />
-            </v-col>
-            <!--IMAGENES PEQUEÑAS MODO DESKTOP-->
-            <v-col class="d-none d-md-flex" md=2>
-                <v-card-actions class="d-flex align-center flex-column" height="200">
-                    <v-col cols="auto" class="pa-10">
-                        <v-sheet :height="130" :width="130">
-                            <v-hover v-slot="{ isHovering, props }">
-                                <GalleryCardSmall :is-hovering="isHovering" :props="props" :src_image="src_image"
-                                    @change-image="handleChangeImage" />
-                            </v-hover>
-                        </v-sheet>
-                        <v-sheet :height="130" :width="130">
-                            <v-hover v-slot="{ isHovering, props }">
-                                <GalleryCardSmall :is-hovering="isHovering" :props="props" :src_image="src_canva"
-                                    @change-image="handleChangeImage" />
-                            </v-hover>
-                        </v-sheet>
-                    </v-col>
-                </v-card-actions>
-            </v-col>
-            <!--IMAGEN PRINCIPAL MODO DESKTOP-->
-            <v-col class="d-none d-md-flex" cols="auto" md=6>
-                <GalleryImg :src_image="currentImage" />
-            </v-col>
-            <!--CARD DETALLES PRODUCTOS-->
-            <v-col cols="auto" order=12>
-                <v-card class="mx-auto pt-1 px-4" width="300" elevation=0>
-                    <!-- DESCRIPCIÓN DEL PRODUCTO -->
-                    <CardDetails :details="ilustration" />
-                    <!--DETALLES DEL PRECIO-->
-                    <PriceDetails :descripcion-precio="descripcionPrecio" :marco-agregado="marcoAgregado" @toggle-marco="toggleMarco" :precio-mostrado="precioMostrado" :format-currency="formatCurrency"/>
-                    <!--PRODUCT COUNTER-->
-                    <ProductCounter :count="countProduct" @add="incrementProduct" @remove="decrementProduct" />
-                    <!-- BOTTOM ADD CART-->
-                    <AddCartButton @add-product="addProduct" :ilustration="ilustration" />
-                </v-card>
-            </v-col>
-        </v-row>
-    </v-container>
-</template>
-
 <script setup>
-import { useRoute } from "vue-router"
-import { ref, onMounted, computed } from 'vue'
-import { useCartStore } from "@/stores/cart";
-import { useGalleryStore } from "@/stores/gallery";
-import { formatCurrency } from "../base/FormatCurrent";
+import { useGaleriaStore } from '@/stores/galeria';
+import { useCartStore } from '@/stores/cart';
+import { ref, onMounted, computed,onUnmounted} from 'vue'
+import { useRoute } from 'vue-router';
+import { useStorage } from '@vueuse/core'
+import { formatCurrency } from '../base/FormatCurrent';
 import Swal from 'sweetalert2'
 
-//importando componentes 
+//Importando Componentes
+import BreadcrumbsComp from '../base/BreadcrumbsComp.vue';
 import CarruselGalleryMobile from "./galleryIsMobile/CarruselGalleryMobile.vue";
-import GalleryImg from "./galleryIsDesktop/GalleryImg.vue";
-import CardDetails from "@/components/gallery/galleryDetails/galleryComp/CardDetails.vue";
-import PriceDetails from "@/components/gallery/galleryDetails/galleryComp/PriceDetails.vue";
-import ProductCounter from "./galleryComp/ProductCounter.vue";
-import AddCartButton from "@/components/gallery/galleryDetails/galleryComp/AddCartButton.vue";
-import BreadcrumbsComp from "../base/BreadcrumbsComp.vue";
-import GalleryCardSmall from "./galleryIsDesktop/GalleryCardSmall.vue";
+import GalleryImg from './galleryIsDesktop/GalleryImg.vue';
+import GalleryCardSmall from './galleryIsDesktop/GalleryCardSmall.vue';
+import CardDetails from './galleryComp/CardDetails.vue';
+import PriceDetails from './galleryComp/PriceDetails.vue';
+import ProductCounter from './galleryComp/ProductCounter.vue';
+import AddCartButton from './galleryComp/AddCartButton.vue';
 
+//Reactive Values
+const galeriaStore = useGaleriaStore();
+const cartStore = useCartStore();
+const route = useRoute();
+const nameIlustracion = route.params.nombre;
 
-const route = useRoute()
-const nameIlustration = route.params.title
-const ilustrationId = route.params.id
-const cartStore = useCartStore()
-const galleryStore = useGalleryStore()
-const ilustration = ref([])
-
-
-//MANEJO DE IMAGENES
-const src_image = ref(require(`@/assets/img/casa${ilustrationId}.jpg`))
-const src_canva = ref(require(`@/assets/img/casa${ilustrationId}_canva.jpg`))
-const currentImage = ref(require(`@/assets/img/casa${ilustrationId}.jpg`))
-
+//Manejo de los datos e imagenes 
+const ilustracionStorage = useStorage(`datosIlustraciones_${nameIlustracion}`);
+const ilustraciones = ref({});
+const imagen1 = ref('');
+const imagen2 = ref('');
+const currentImage = ref('');
 const handleChangeImage = (newImage) => {
     currentImage.value = newImage
 }
 
-//carousel images Mobile
-const imageCarousel = [
+
+const rutas = [
     {
-        url: require(`@/assets/img/casa${ilustrationId}.jpg`),
-        alt: 'imagen de ilustración uno'
+        title: 'Inicio',
+        disabled: false,
+        to: '/'
     },
     {
-        url: require(`@/assets/img/casa${ilustrationId}_canva.jpg`),
-        alt: 'imagen de ilustración uno'
+        title: 'ilustraciones',
+        disabled: false,
+        to: '/ilustration'
+    },
+    {
+        title: nameIlustracion,
+        disabled: true
     }
-]
+];
 
-//toogleButtons
+//Manejo del toogleButton
 const marcoAgregado = ref(false)
-const toggleMarco = () => {
-    marcoAgregado.value = !marcoAgregado.value
 
-}
-const precioMostrado = computed(() => {
-    const opciones = ilustration.value?.opciones;
-    if (opciones && opciones.length >= 2) {
-        return marcoAgregado.value ? opciones[1].price : opciones[0].price;
-    }
-    return 0;
+const priceText = computed(() =>{
+    return marcoAgregado.value ? '(*Precio por lámina + marco)' :'(*Precio por unidad)'; 
 });
-const descripcionPrecio = computed(() => {
-    return marcoAgregado.value && ilustration.value?.opciones ? '(*Precio por lámina + marco)' : '(*Precio por unidad)';
+
+//Cambio de Precios
+const precioDinamico = computed(() =>{
+    const precio = parseInt(ilustraciones.value.precio)
+    const precioMarco = parseInt(ilustraciones.value.precioMarco)
+    return marcoAgregado.value ? precio + precioMarco : precio
+})
+const toogleMarco = (() => {
+    marcoAgregado.value = !marcoAgregado.value
 });
-//Contador de productos
+
+//Contar y agregar productos 
+
 const countProduct = ref(0)
 const incrementProduct = () => countProduct.value++
-const decrementProduct = () => (countProduct.value > 0 ? countProduct.value-- : null)
+const decrementProduct = () =>(countProduct.value > 0 ? countProduct.value-- : null)
 
-const addProduct = (item) => {
-    if (countProduct.value > 0) {
-        const price = marcoAgregado.value ? item.opciones[1].price : item.opciones[0].price
+
+const addProduct = (item) =>{
+    if(countProduct.value > 0){
+        const precio = parseInt(ilustraciones.value.precio)
+        const precioMarco = parseInt(ilustraciones.value.precioMarco)
+        const price = marcoAgregado.value ? precio + precioMarco : precio
+
         let product = {
             id: item.id,
-            title: item.title,
-            image: item.image,
+            nombre: item.nombre,
+            imagen: item.imagen1,
             quantity: countProduct.value,
             withFrame: marcoAgregado.value,
             price: price
-        }
+        };
         cartStore.addProductToCart(product);
         countProduct.value = 0;
         Swal.fire({
@@ -142,29 +105,94 @@ const addProduct = (item) => {
     }
 }
 
-// RUTAS DE BREADCRUMBS
-const rutas = [
-    {
-        title: 'Inicio',
-        disabled: false,
-        to: '/'
-    },
-    {
-        title: 'Ilustraciones',
-        disabled: false,
-        to: '/ilustration'
-    },
-    {
-        title: nameIlustration,
-        disabled: true
-    }
-]
 
 
 
+
+// Lifecycle hooks
 onMounted(() => {
-    ilustration.value = galleryStore.getIlustrationByTitle(nameIlustration)
+    // Actualizar los datos de las Ilustraciones desde la tienda si no están en el almacenamiento local
+    try {
+        if (ilustracionStorage.value) {
+            ilustraciones.value = JSON.parse(ilustracionStorage.value);
+        } else {
+            ilustraciones.value = galeriaStore.getIlustrationByTitle(nameIlustracion);
+            ilustracionStorage.value = JSON.stringify(ilustraciones.value)
+        }
+    } catch (error) {
+        console.error("Error al analizar los datos JSON:", error);
+    }
+
+    if (ilustraciones.value) {
+        imagen1.value = ilustraciones.value.imagen1;
+        imagen2.value = ilustraciones.value.imagen2;
+        currentImage.value = ilustraciones.value.imagen1;
+    }
+    // console.log(ilustraciones.value)
+    // console.log(imagen1.value)
+
 })
+onUnmounted(() => {
+    ilustracionStorage.value = null;
+    localStorage.removeItem(`datosIlustraciones_${nameIlustracion}`)
+})
+
 </script>
+
+<template>
+    <v-container>
+        <BreadcrumbsComp :rutas="rutas" />
+        <v-row d-flex>
+            <!-- CARRUSEL MODO MOBILE -->
+            <v-col cols=12 class="d-md-none">
+                <CarruselGalleryMobile :image-carousel1="imagen1"
+                :image-carousel2="imagen2" />
+            </v-col>
+            <!--IMAGENES PEQUEÑAS MODO DESKTOP-->
+            <v-col class="d-none d-md-flex" md=2>
+                <v-card-actions class="d-flex align-center flex-column" height="200">
+                    <v-col cols="auto" class="pa-10">
+                        <v-sheet :height="130" :width="130">
+                            <v-hover v-slot="{ isHovering, props }">
+                                <GalleryCardSmall :is-hovering="isHovering" :props="props" :src_image="imagen1"
+                                    @change-image="handleChangeImage" />
+                            </v-hover>
+                        </v-sheet>
+                        <v-sheet :height="130" :width="130">
+                            <v-hover v-slot="{ isHovering, props }">
+                                <GalleryCardSmall :is-hovering="isHovering" :props="props" :src_image="imagen2"
+                                    @change-image="handleChangeImage" />
+                            </v-hover>
+                        </v-sheet>
+                    </v-col>
+                </v-card-actions>
+            </v-col>
+            <!--IMAGEN PRINCIPAL MODO DESKTOP-->
+            <v-col class="d-none d-md-flex" cols="auto" md=6>
+                <GalleryImg :src_image="currentImage" />
+            </v-col>
+            <!--CARD DETALLES PRODUCTOS-->
+            <v-col cols="auto" order=12>
+                <v-card class="mx-auto pt-1 px-4" width="300" elevation=0>
+                    <!-- DESCRIPCIÓN DEL PRODUCTO -->
+                    <CardDetails :details="ilustraciones"/>
+                    <!--DETALLES DEL PRECIO-->
+                    <PriceDetails :format-currency="formatCurrency" :precio-mostrado="ilustraciones.precio" 
+                    :price-text="priceText"
+                    :price-marco="ilustraciones.precioMarco"
+                    :precio-dinamico="precioDinamico"
+                    @toggle-marco="toogleMarco"/>
+                    <!--PRODUCT COUNTER-->
+                    <ProductCounter :count="countProduct" @add="incrementProduct"
+                    @remove="decrementProduct"/>
+                    <!-- BOTTOM ADD CART-->
+                    <AddCartButton
+                    @add-product="addProduct"
+                    :ilustration="ilustraciones"/>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
+</template>
 
 <style scoped></style>

@@ -9,7 +9,7 @@
         </thead>
         <tbody class="text-table">
             <tr v-for="(item,index) in listStore" :key="index" class="my-8">
-                <td class="py-3"><v-img :src="require(`@/assets/${item.image}`)" width="120"></v-img></td>
+                <td class="py-3"><v-img :src="item.imagen" width="120"></v-img></td>
                 <td class="py-3">{{ item.title }}</td>
                 <td class="text-center pr-12">{{ item.quantity }}</td>
                 <td>{{ formatCurrency(item.price) }}</td>

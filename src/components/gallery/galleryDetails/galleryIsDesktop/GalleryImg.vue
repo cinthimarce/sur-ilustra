@@ -20,13 +20,5 @@ const hover = ref(false);
 </script>
 
 <style scoped>
-.image-transition {
-  transition: transform 0.3s, opacity 0.3s;
-}
-
-.image-hover {
-  transform: scale(1.2); /* Ajusta según el zoom deseado */
-  opacity: 0.9; /* Ajusta según la opacidad deseada */
-}
 
 </style>

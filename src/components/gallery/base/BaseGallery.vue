@@ -16,18 +16,19 @@
                                     <v-btn v-if="isHovering"
                                         class="d-flex transition-fast-in-fast-out color-primary v-card--reveal text-h9"
                                         :class="{ isHovering }" style="height: 10%">
-                                        <v-text class="text-overline">Ver Detalle</v-text>
+                                        <!-- <v-text class="text-overline">Ver Detalle</v-text> -->
+                                        <v-card-text class="text-overline">Ver Detalles</v-card-text>
                                     </v-btn>
                                 </v-expand-transition>
                             </v-img>
-                            <v-card-text>
+                            
                                 <p class="font-weight-light text-septenary text-h6 ma-0">
                                     {{ producto.nombre }}
                                 </p>
                                 <p class="font-weight-medium text-grey subtext-card">
                                     {{ producto.subtitulo }}
                                 </p>
-                            </v-card-text>
+                            
 
                             <v-divider color="info"></v-divider>
 

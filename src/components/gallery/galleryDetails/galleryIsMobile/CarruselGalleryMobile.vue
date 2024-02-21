@@ -1,23 +1,22 @@
 <template>
   <v-carousel :show-arrows="true" hide-delimiter-background>
     <v-carousel-item
-    :src="props.imageCarousel.imagen1"
+    :src="props.imageCarousel1"
     ></v-carousel-item>
     <v-carousel-item
-    :src="props.imageCarousel.imagen2"
+    :src="props.imageCarousel2"
     ></v-carousel-item>
   </v-carousel>
 </template>
   
 <script setup>
-import {defineProps, onMounted} from 'vue'
+import {defineProps} from 'vue'
 
 const props = defineProps({
-  imageCarousel: Object
+  imageCarousel1: String,
+  imageCarousel2: String,
 })
   
-onMounted(() =>{
-  console.log(props.imageCarousel)
-})
+
 </script>
   <style scoped></style>

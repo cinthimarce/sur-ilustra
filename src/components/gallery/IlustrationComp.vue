@@ -18,9 +18,9 @@ const route = useRouter()
 
 //const galleryStore = useGalleryStore()
 const galeriaStore = useGaleriaStore()
-console.log(galeriaStore.ilustrationsGalery)
+
 const ilustraciones = galeriaStore.ilustrationsGalery
-//const ilustrations = galleryStore.galleryProducts.ilustrations
+
 
 const redirectIlustration = (title) => {
     route.push(`/ilustration/${title}`)

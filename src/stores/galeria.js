@@ -277,7 +277,7 @@ export const useGaleriaStore = defineStore("galeria", {
       }
     },
     getIlustrationByTitle(nombre){
-      return this.productos.ilustraciones.find(prod => prod.nombre == nombre)
+      return this.ilustrationsGalery.find(prod => prod.nombre == nombre)
     },
     getAvecillasByTitle(nombre){
       return this.avecillasGalery.find(prod => prod.nombre == nombre)
