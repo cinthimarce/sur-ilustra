@@ -26,8 +26,8 @@ const itemsNav = [
         to: "/",
     },
     {
-        name: "Ilustración",
-        to: "/ilustration",
+        name: "Ilustraciones",
+        to: "/ilustraciones",
         icon: "mdi-fountain-pen-tip",
     },
     {
@@ -38,7 +38,7 @@ const itemsNav = [
 /*     {
         name: "Escultura",
         icon: "mdi-drawing",
-        to: "/scult",
+        to: "/esculturas",
     }, */
     {
         name: "Sobre",
@@ -48,7 +48,7 @@ const itemsNav = [
     {
         name: "Contacto",
         icon: "mdi-phone",
-        to: "/contact",
+        to: "/contacto",
     },
     {
         name: "Compras",

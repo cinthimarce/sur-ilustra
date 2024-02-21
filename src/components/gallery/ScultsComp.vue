@@ -1,6 +1,8 @@
 <template>
-    <BreadcrumbsComp :rutas="rutas"/>
-    <BaseGallery :productos="ilustrations" @redirecTo="redirectScults"/>
+    <v-container class="pa-4 text-center">
+        <BreadcrumbsComp :rutas="rutas" />
+        <BaseGallery :productos="ilustrations" @redirecTo="redirectScults" />
+    </v-container>
 </template>
 
 <script setup>
@@ -15,12 +17,12 @@ const route = useRouter()
 const cartStore = useCartStore()
 const ilustrations = cartStore.galleryProducts.ilustrations
 
-const redirectScults =(id) =>{
-    route.push(`/scult/${id}`)
+const redirectScults = (nombre) => {
+    route.push(`/esculturas/${nombre}`)
 }
 const rutas = [
     {
-        title:'Inicio',
+        title: 'Inicio',
         disabled: false,
         href: '/'
     },
@@ -31,6 +33,4 @@ const rutas = [
 ]
 </script>
 
-<style scoped>
-    
-</style>
+<style scoped></style>

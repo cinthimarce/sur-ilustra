@@ -43,7 +43,7 @@ const rutas = [
     {
         title: 'ilustraciones',
         disabled: false,
-        to: '/ilustration'
+        to: '/ilustraciones'
     },
     {
         title: nameIlustracion,

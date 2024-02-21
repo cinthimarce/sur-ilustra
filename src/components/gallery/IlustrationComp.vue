@@ -22,8 +22,8 @@ const galeriaStore = useGaleriaStore()
 const ilustraciones = galeriaStore.ilustrationsGalery
 
 
-const redirectIlustration = (title) => {
-    route.push(`/ilustration/${title}`)
+const redirectIlustration = (nombre) => {
+    route.push(`/ilustraciones/${nombre}`)
 }
 const rutas = [
     {

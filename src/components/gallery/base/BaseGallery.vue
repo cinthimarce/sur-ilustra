@@ -57,7 +57,7 @@ defineProps({
     productos: Object,
 })
 
-const emit = defineEmits('redirectTo')
+const emit = defineEmits(['redirectTo'])
 
 
 const redirectTo = (title) => {

@@ -24,12 +24,12 @@ const routes = [
     component: AboutView
   },  
   {
-    path: '/ilustration',
-    name: 'ilustration',
+    path: '/ilustraciones',
+    name: 'ilustraciones',
     component: IlustrationView
   },
   {
-    path: '/ilustration/:nombre',
+    path: '/ilustraciones/:nombre',
     name:'ilustrationDetails',
     component: () => import('@/views/IlustrationDetails.vue')
   },
@@ -44,12 +44,12 @@ const routes = [
     component: () => import('@/views/AvecillasDetailsView.vue')
   },
   {
-    path: '/scult',
-    name: 'scult',
+    path: '/esculturas',
+    name: 'esculturas',
     component: ScultView
   },
   {
-    path: '/contact',
+    path: '/contacto',
     name: 'contact',
     component: ContactView
   },
