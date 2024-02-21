@@ -15,7 +15,7 @@
 
 import { } from 'vue'
 const description =
-    "Humberto Vera, oriundo de Coyhaique, se caracteriza por ser uno de los mejores acuarelistas de la región Austral de Chile, realizó sus estudios de Pedagogía en Arte en la Universidad de Chile, el año 2012, Humberto mostró un temprano interés por el arte, durante su infancia participó en varios concursos de arte obteniendo los primeros lugares. A la edad de 15 años ya estaba trabajando en una tienda de grabados. Ya como profesional ha realizado varias exposiciones en la Casa de la Cultura de Coyhaique, en la técnica de Acuarela, y se ha desempeñado como profesor y tallerista en distintos establecimientos. ";
+    "CINTHIA MUNOZ ORIGINAL Humberto Vera, oriundo de Coyhaique, se caracteriza por ser uno de los mejores acuarelistas de la región Austral de Chile, realizó sus estudios de Pedagogía en Arte en la Universidad de Chile, el año 2012, Humberto mostró un temprano interés por el arte, durante su infancia participó en varios concursos de arte obteniendo los primeros lugares. A la edad de 15 años ya estaba trabajando en una tienda de grabados. Ya como profesional ha realizado varias exposiciones en la Casa de la Cultura de Coyhaique, en la técnica de Acuarela, y se ha desempeñado como profesor y tallerista en distintos establecimientos. ";
 
 </script>
 
