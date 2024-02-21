@@ -5,10 +5,7 @@
 </template>
  
 <script setup>
-import { useGalleryStore } from "@/stores/gallery.js";
 import { useGaleriaStore } from "./stores/galeria.js";
-const galleryStore = useGalleryStore()
-galleryStore.initializeGallery()
 const galeriaStore = useGaleriaStore()
 galeriaStore.getProductos()
 

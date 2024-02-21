@@ -7,7 +7,7 @@ import { useGaleriaStore } from '@/stores/galeria.js';
 import { getAuth } from 'firebase/auth';
 import { db } from '@/firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
-//import { formatCurrency } from '../gallery/base/FormatCurrent';
+import { formatCurrency } from '../gallery/base/FormatCurrent';
 
 
 
@@ -281,8 +281,9 @@ onUnmounted(() => {
                                                 :rules="[v => !!v || 'El subtitulo es obligatorio']"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-text-field label="precio" v-model="state.precio"
-                                                :rules="[v => !!v || 'El precio es obligatorio', v => /^\d+(\.\d{1,2})?$/.test(v) || 'El precio debe ser un número válido']"></v-text-field>
+                                            <v-text-field label="precio" v-model="state.precio" 
+                                                :rules="[v => !!v || 'El precio es obligatorio', v => /^\d+(\.\d{1,2})?$/.test(v) || 'El precio debe ser un número válido']">
+                                            </v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
                                             <v-text-field v-model="state.precioMarco" label="precio Marco"
@@ -336,6 +337,12 @@ onUnmounted(() => {
                         </v-card>
                     </v-dialog>
                 </v-toolbar>
+            </template>
+            <template v-slot:item.precio="{item}">
+                {{ formatCurrency(item.precio) }}
+            </template>
+            <template v-slot:item.precioMarco="{item}">
+                {{ formatCurrency(item.precioMarco) }}
             </template>
             <template v-slot:item.actions="{ item }">
                 <v-icon size="small" color="blue" class="me-2" @click="editarFormulario(item)">
