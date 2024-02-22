@@ -7,7 +7,7 @@
 
 <script setup>
 
-import BaseGallery from './base/BaseGallery.vue';
+import BaseGallery from './base/BaseGallery.vue';  
 //import { useGalleryStore } from '@/stores/gallery';
 import { useGaleriaStore } from '@/stores/galeria.js';
 import BreadcrumbsComp from './base/BreadcrumbsComp.vue';

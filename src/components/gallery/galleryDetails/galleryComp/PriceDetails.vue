@@ -1,6 +1,6 @@
 <template>
     <v-card-title class="text-h4 pt-2">
-        <div class="color-picture">
+        <div class="color-picture ">
             <h4  class="font-weight-light" elevation="0" :class="{ 'font-bold': !marcoAgregado }">
                 {{ formatCurrency(precioDinamico) }}
             </h4>
@@ -37,5 +37,6 @@ const toggleMarco = () => {
 }
 .font-bold {
   font-weight: 700;
+  
 }
 </style>

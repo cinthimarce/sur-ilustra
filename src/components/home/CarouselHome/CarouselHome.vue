@@ -1,10 +1,10 @@
 <template>
     <v-carousel hide-delimiters>
-      <v-carousel-item src="@/assets/banner/casa1.jpg" @click="redirectIlustration(1)"></v-carousel-item>
-      <v-carousel-item src="@/assets/banner/casa2.jpg" @click="redirectIlustration(2)"></v-carousel-item>
-      <v-carousel-item src="@/assets/banner/casa3.jpg" @click="redirectIlustration(3)"></v-carousel-item>
-      
-
+      <v-carousel-item src="@/assets/banner/casa1.webp" @click="redirectIlustration(1)"></v-carousel-item>
+      <v-carousel-item src="@/assets/banner/casa2.webp" @click="redirectIlustration(2)"></v-carousel-item>
+      <v-carousel-item src="@/assets/banner/casa3.webp" @click="redirectIlustration(3)"></v-carousel-item>
+      <v-carousel-item src="@/assets/banner/avecilla1.webp" @click="redirectIlustration(4)"></v-carousel-item>
+      <v-carousel-item src="@/assets/banner/avecilla2.webp" @click="redirectIlustration(5)"></v-carousel-item>
     </v-carousel>
   </template>
     
