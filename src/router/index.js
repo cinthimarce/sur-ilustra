@@ -36,12 +36,13 @@ const routes = [
   {
     path: '/avecillas',
     name: 'avecillas',
-    component: AvecillasView
+    component: AvecillasView,
   },
   {
     path: '/avecillas/:nombre',
     name:'avecillasDetails',
-    component: () => import('@/views/AvecillasDetailsView.vue')
+    component: () => import('@/views/AvecillasDetailsView.vue'),
+    props: true
   },
   {
     path: '/esculturas',
