@@ -13,14 +13,19 @@ import BreadcrumbsComp from './base/BreadcrumbsComp.vue';
 import { useRouter } from 'vue-router';
 
 
+
 const route = useRouter()
 const galeriaStore = useGaleriaStore()
 const avecillas = galeriaStore.avecillasGalery
 // const galleryStore = useGalleryStore()
 // const avecillas = galleryStore.gallery.avecillas
 
-const redirectAvecillas = (nombre) => {
-    route.push(`/avecillas/${nombre}`)
+const redirectAvecillas = (nombre,id) => {
+    route.push({
+        name:'avecillasDetails',
+        params: { nombre},
+        query: { id }
+    })
 }
 const rutas = [
     {
@@ -33,6 +38,8 @@ const rutas = [
         disabled: true
     }
 ]
+
+
 </script>
 
 <style scoped></style>

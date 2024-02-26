@@ -1,8 +1,9 @@
 <script setup>
 import { useGaleriaStore } from '@/stores/galeria';
 import { useRoute } from 'vue-router';
+
 import { useCartStore } from '@/stores/cart';
-import { ref, onMounted,computed,onUnmounted } from 'vue'
+import { ref, onMounted,computed,onUnmounted} from 'vue'
 import { useStorage } from '@vueuse/core'
 import { formatCurrency } from "../base/FormatCurrent";
 import Swal from 'sweetalert2'
@@ -17,12 +18,13 @@ import PriceDetails from './galleryComp/PriceDetails.vue';
 import ProductCounter from './galleryComp/ProductCounter.vue';
 import AddCartButton from './galleryComp/AddCartButton.vue';
 
-
 // Reactive Values
 const galeriaStore = useGaleriaStore()
 const cartStore = useCartStore()
 const route = useRoute()
+
 const nameAvecilla = route.params.nombre;
+//const avecillaID = route.query.id;
 
 const avecillaStorage = useStorage(`datosAvecillas_${nameAvecilla}`);
 const avecillas = ref({});
@@ -114,6 +116,7 @@ onMounted(() => {
         } else {
             avecillas.value = galeriaStore.getAvecillasByTitle(nameAvecilla);
             avecillaStorage.value = JSON.stringify(avecillas.value)
+            
         }
     } catch (error) {
         console.error("Error al analizar los datos JSON:", error);
@@ -122,9 +125,10 @@ onMounted(() => {
     if (avecillas.value) {
         imagen1.value = avecillas.value.imagen1;
         imagen2.value = avecillas.value.imagen2;
-        currentImage.value = avecillas.value.imagen1;
+        currentImage.value = avecillas.value.imagen1;  
     }
-    // console.log(avecillas.value)
+    
+    console.log(avecillas.value)
     // console.log(imagen1.value)
     // console.log(typeof(avecillas.value))
 

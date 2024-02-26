@@ -281,6 +281,9 @@ export const useGaleriaStore = defineStore("galeria", {
     },
     getAvecillasByTitle(nombre){
       return this.avecillasGalery.find(prod => prod.nombre == nombre)
+    },
+    getAvecillasById(id){
+      return this.avecillasGalery.find(prod => prod.id == id)
     }
 
   },
