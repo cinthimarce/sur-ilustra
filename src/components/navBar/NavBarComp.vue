@@ -1,5 +1,5 @@
 <template>
-    <div class="desktop d-md-none">
+    <div class="desktop d-md-none font-menu">
         <NavBarMobile :itemsNav="itemsNav" :logoOne="logoOne" :LogoTwo="logoTwo" />
     </div>
 
@@ -13,7 +13,7 @@
 import NavBarMobile from "../navBar/IsMobile/NavBarMobile.vue"
 import NavBarDesktop from "./Desktop/NavBarDesktop.vue";
 
-const logoOne = require('../../assets/banner/logoazul.png');
+const logoOne = require('../../assets/banner/logoverde.png');
 const logoTwo = require('../../assets/banner/logo2.png');
 
 
@@ -59,4 +59,8 @@ const itemsNav = [
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.font-menu{
+    font-family: 'Hepta Slab', serif !important;
+}
+</style>

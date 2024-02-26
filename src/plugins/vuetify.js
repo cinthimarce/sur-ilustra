@@ -21,7 +21,7 @@ export default createVuetify(
           nonary: '#FFFFFF',
           denary: '#000000',
           undenary: '#fcb050',
-          duodenary: '#ee4b2c'
+          duodenary: '#557067'
         }
       },
     },

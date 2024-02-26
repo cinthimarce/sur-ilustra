@@ -1,9 +1,9 @@
 <template>
     <div>
-        <v-navigation-drawer temporary location="left" absolute app v-model="drawer" color="primary">
+        <v-navigation-drawer temporary location="left" absolute app v-model="drawer" color="duodenary">
             <v-layout class="mt-4 d-flex flex-column text-right">
                 <div class="d-flex justify-space-between">
-                    <v-img :src="props.logoOne" max-height="80" max-width="100" contain>
+                    <v-img :src="props.logoOne" max-height="80" max-width="100" contain >
                     </v-img>
                     <v-btn color="transparent" elevation="0" @click="closeDrawer">
                         <v-icon icon="mdi-close" size="30"></v-icon>
@@ -14,7 +14,7 @@
 
             <!-- Hover Menu Mobile -->
             <v-list>
-                <v-list-item v-for="(item, index) in props.itemsNav" :key="index" :value="item" color="" :to="item.to">
+                <v-list-item v-for="(item, index) in props.itemsNav" :key="index" :value="item" color="secondary" :to="item.to">
                     <template v-slot:prepend>
                         <v-icon :icon="item.icon"></v-icon>
                     </template>
@@ -79,5 +79,8 @@ const closeDrawer = () => {
 
 font-family: "Homemade Apple", cursive;
 font-size: 1.2rem;
+}
+.logo-left {
+    color: #8AA49B !important;
 }
 </style>

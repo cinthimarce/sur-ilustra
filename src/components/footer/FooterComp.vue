@@ -3,8 +3,9 @@
         <div>
             <v-btn v-for="icon in icons" :key="icon" class="mx-0" :icon="icon.name" variant="text" color="white"
                 @click="redirectTo(icon.to)">
-
+                
             </v-btn>
+            <span class="mdi mdi-etsy"></span>
 
         </div>
 
@@ -22,8 +23,8 @@
 <script setup>
 const icons = [
     {
-        name: 'mdi-facebook',
-        to: 'https://www.facebook.com/gerardo.o.montecinos',
+        name: 'mdi-etsy',
+        to: 'https://www.etsy.com/es/',
 
     },
     {

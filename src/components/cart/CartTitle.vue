@@ -16,7 +16,7 @@
         </v-window>
     </v-card>
     <v-divider class="pb-2"></v-divider>
-    <v-card class="subtext-caudex mb-2"         :title="`Carrito(${cartStore.cartCount} Productos)`" variant="tonal" color="caudex">
+    <v-card class="subtext-caudex mb-2" :title="`Carrito(${cartStore.cartCount} Productos)`" variant="tonal" color="caudex">
     </v-card>
 </template>
 

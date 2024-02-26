@@ -17,7 +17,7 @@
                     subtitle="sandra_a88@gmailcom"></v-list-item>
             </v-list>
             <v-divider></v-divider>
-           
+
             <v-list>
                 <v-list-item v-for="(item, index) in props.itemsNav" :key="index" :value="item" color=""
                     prepend-icon="item.icon">
@@ -74,5 +74,7 @@ function logout(){
 </script>
 
 <style scoped>
-
+.font-menu{
+    font-family: 'Hepta Slab', serif !important;
+}
 </style>
