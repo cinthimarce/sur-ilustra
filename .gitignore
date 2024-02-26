@@ -4,7 +4,8 @@ node_modules
 
 # firebaseConfigExample archivo
 # que debe ocupar solo otros desarrolladores 
-src\firebase\firebaseConfigExample.js
+src/firebase/firebaseConfigExample.js
+
 # local env files
 .env.local
 .env.*.local
