@@ -22,6 +22,7 @@ const galeriaStore = useGaleriaStore();
 const cartStore = useCartStore();
 const route = useRoute();
 const nameIlustracion = route.params.nombre;
+const idIlustration = route.query.id;
 
 //Manejo de los datos e imagenes 
 const ilustracionStorage = useStorage(`datosIlustraciones_${nameIlustracion}`);
@@ -116,7 +117,7 @@ onMounted(() => {
         if (ilustracionStorage.value) {
             ilustraciones.value = JSON.parse(ilustracionStorage.value);
         } else {
-            ilustraciones.value = galeriaStore.getIlustrationByTitle(nameIlustracion);
+            ilustraciones.value = galeriaStore.getIlustrationById(idIlustration);
             ilustracionStorage.value = JSON.stringify(ilustraciones.value)
         }
     } catch (error) {
