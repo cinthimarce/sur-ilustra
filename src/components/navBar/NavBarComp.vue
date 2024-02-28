@@ -1,10 +1,10 @@
 <template>
     <div class="desktop d-md-none font-menu">
-        <NavBarMobile :itemsNav="itemsNav" :logoOne="logoOne" :LogoTwo="logoTwo" :LogoThree="logoThree"/>
+        <NavBarMobile :itemsNav="itemsNav" :logoOne="logoOne" :LogoTwo="logoTwo" />
     </div>
 
     <div class="d-none d-md-flex">
-        <NavBarDesktop :logo="logoThree" :itemsNav="itemsNav" />
+        <NavBarDesktop :logo="logoOne" :itemsNav="itemsNav" />
     </div>
 </template>
 
@@ -14,8 +14,7 @@ import NavBarMobile from "../navBar/IsMobile/NavBarMobile.vue"
 import NavBarDesktop from "./Desktop/NavBarDesktop.vue";
 
 const logoOne = require('../../assets/banner/logoverde.png');
-const logoTwo = require('../../assets/banner/logoazul.png');
-const logoThree = require('../../assets/banner/logowhite.png');
+const logoTwo = require('../../assets/banner/logo2.png');
 
 
 
