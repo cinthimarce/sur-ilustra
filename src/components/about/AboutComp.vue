@@ -8,7 +8,7 @@
         </v-img>
     </v-card>
 
-    <v-card class="mx-auto" max-width="434" :text="description"></v-card>
+    <v-card class="mx-auto text-description" max-width="434" :text="description"></v-card>
 </template>
 
 <script setup>
@@ -19,4 +19,8 @@ const description =
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.text-description{
+    font-family: 'Hepta Slab', serif !important;
+}
+</style>
