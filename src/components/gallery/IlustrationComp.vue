@@ -1,7 +1,7 @@
 <template>
     <v-container class="pa-4 text-center">
         <BreadcrumbsComp :rutas="rutas" />
-        <BaseGallery :productos="ilustraciones" @redirectTo="redirectIlustration" />
+        <BaseGallery :productos="ilustraciones" @redirectTo="redirectIlustrations" />
     </v-container>
 </template>
 
@@ -22,8 +22,15 @@ const galeriaStore = useGaleriaStore()
 const ilustraciones = galeriaStore.ilustrationsGalery
 
 
-const redirectIlustration = (nombre) => {
-    route.push(`/ilustraciones/${nombre}`)
+// const redirectIlustration = (nombre) => {
+//     route.push(`/ilustraciones/${nombre}`)
+// }
+const redirectIlustrations = (nombre,id) => {
+    route.push({
+        name:'ilustrationDetails',
+        params: { nombre },
+        query: { id }
+    })
 }
 const rutas = [
     {

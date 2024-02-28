@@ -24,13 +24,14 @@ const cartStore = useCartStore()
 const route = useRoute()
 
 const nameAvecilla = route.params.nombre;
-//const avecillaID = route.query.id;
+const idAvecilla = route.query.id;
 
 const avecillaStorage = useStorage(`datosAvecillas_${nameAvecilla}`);
 const avecillas = ref({});
 const imagen1 = ref('');
 const imagen2 = ref('');
 const currentImage = ref('');
+
 
 
 
@@ -114,7 +115,7 @@ onMounted(() => {
         if (avecillaStorage.value) {
             avecillas.value = JSON.parse(avecillaStorage.value);
         } else {
-            avecillas.value = galeriaStore.getAvecillasByTitle(nameAvecilla);
+            avecillas.value = galeriaStore.getAvecillasById(idAvecilla);
             avecillaStorage.value = JSON.stringify(avecillas.value)
             
         }
@@ -127,8 +128,9 @@ onMounted(() => {
         imagen2.value = avecillas.value.imagen2;
         currentImage.value = avecillas.value.imagen1;  
     }
-    
-    console.log(avecillas.value)
+    //avecillasID.value = galeriaStore.getAvecillasById(aveid)
+    //console.log(avecillasID.value);
+    //console.log(avecillas.value)
     // console.log(imagen1.value)
     // console.log(typeof(avecillas.value))
 

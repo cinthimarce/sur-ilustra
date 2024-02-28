@@ -284,7 +284,9 @@ export const useGaleriaStore = defineStore("galeria", {
     },
     getAvecillasById(id){
       return this.avecillasGalery.find(prod => prod.id == id)
+    },
+    getIlustrationById(id){
+      return this.ilustrationsGalery.find(prod => prod.id == id)
     }
-
   },
 });
