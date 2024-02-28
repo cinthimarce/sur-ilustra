@@ -5,7 +5,7 @@
                 @click="redirectTo(icon.to)">
                 
             </v-btn>
-            <span class="mdi mdi-etsy"></span>
+            
 
         </div>
 
