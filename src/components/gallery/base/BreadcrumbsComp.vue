@@ -16,5 +16,7 @@ const props = defineProps(['rutas'])
 <style scoped>
 .v-breadcrumbs {
     color: #8AA49B  !important;
+    font-family: 'Hepta Slab', serif !important;
+    
 }
 </style>

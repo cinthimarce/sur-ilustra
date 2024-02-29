@@ -1,5 +1,5 @@
 <template>
-        <v-row class="fill-height" align="center" justify="center">
+        <v-row class="fill-height " align="center" justify="center">
             <template v-for="producto in productos" :key="producto.id">
                 <v-col cols="12" md="4">
                     <v-hover v-slot="{ isHovering, props }">
@@ -7,7 +7,7 @@
                             class="transparent">
                             <v-img :src="producto.imagen1" height="360px" cover @click="redirectTo(producto.nombre,producto.id)">
                                 <div class="align-self-center">
-                                    <v-card-title class="text-h6 text-transparent d-flex flex-column align-center"
+                                    <v-card-title class="font text-h6 text-transparent d-flex flex-column align-center"
                                         :class="{ 'show-btns': isHovering }" :color="transparent">
                                     </v-card-title>
                                 </div>
@@ -114,5 +114,9 @@ const redirectTo = (title,id) => {
 
 .subtext-card {
     font-size: 0.85rem;
+}
+
+.font{
+    font-family: 'Hepta Slab', serif !important;
 }
 </style>
