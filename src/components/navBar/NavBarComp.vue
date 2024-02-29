@@ -23,37 +23,37 @@ const logoThree = require('../../assets/banner/logoazul.png');
 const itemsNav = [
     {
         name: "Inicio",
-        icon: "mdi-home",
+        icon: "mdi:mdi-home",
         to: "/",
     },
     {
         name: "Ilustraciones",
         to: "/ilustraciones",
-        icon: "mdi-fountain-pen-tip",
+        icon: "mdi:mdi-fountain-pen-tip",
     },
     {
         name: "Avecillas",
-        icon: "mdi-bird",
+        icon: "mdi:mdi-bird",
         to: "/avecillas",
     },
 /*     {
         name: "Escultura",
-        icon: "mdi-drawing",
+        icon: "mdi:mdi-drawing",
         to: "/esculturas",
     }, */
     {
         name: "Sobre",
-        icon: "mdi-information",
+        icon: "mdi:mdi-information",
         to: "/about",
     },
     {
         name: "Contacto",
-        icon: "mdi-phone",
+        icon: "mdi:mdi-phone",
         to: "/contacto",
     },
     {
         name: "Compras",
-        icon: "mdi-shopping",
+        icon: "mdi:mdi-shopping",
         to: "/cart",
     },
 ];

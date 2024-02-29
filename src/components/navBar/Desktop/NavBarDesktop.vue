@@ -13,7 +13,7 @@
                 </v-tabs>
 
                 <v-badge :content="cartStore.cartTotalProducts" color="primary">
-                    <v-btn icon="mdi-cart" to="/cart"></v-btn>
+                    <v-btn icon="mdi:mdi-cart" to="/cart"></v-btn>
                 </v-badge>
 
             </v-row>

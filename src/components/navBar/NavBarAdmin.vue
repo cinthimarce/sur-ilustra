@@ -12,7 +12,7 @@ import NavBarAdminMobile from './IsMobile/NavBarAdminMobile.vue';
     const itemsNav = [
     {
         name: "Productos",
-        icon: "mdi-home",
+        icon: "mdi:mdi-home",
     },
     
 ];

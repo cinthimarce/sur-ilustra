@@ -5,8 +5,6 @@
                 @click="redirectTo(icon.to)">
                 
             </v-btn>
-            
-
         </div>
 
         <div class="pt-1 sur">
@@ -23,12 +21,12 @@
 <script setup>
 const icons = [
     {
-        name: 'mdi-etsy',
+        name: 'fa-brands fa-etsy',
         to: 'https://www.etsy.com/es/',
 
     },
     {
-        name: 'mdi-instagram',
+        name: 'mdi:mdi-instagram',
         to: 'https://www.instagram.com/enmarcaysen/',
 
     },

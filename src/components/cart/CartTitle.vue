@@ -9,8 +9,8 @@
             <v-window-item>
                 <v-card color="caudex" flat>
                     <v-card-text class="d-flex justify-center text-send">
-                        <v-icon class="mr-2">mdi-truck-fast</v-icon> Envíos a todo Chile <v-icon
-                            class="ml-2">mdi-truck-fast</v-icon> </v-card-text>
+                        <v-icon class="mr-2">mdi:mdi-truck-fast</v-icon> Envíos a todo Chile <v-icon
+                            class="ml-2">mdi:mdi-truck-fast</v-icon> </v-card-text>
                 </v-card>
             </v-window-item>
         </v-window>

@@ -6,7 +6,7 @@
                     <v-img :src="props.logoOne" max-height="80" max-width="100" contain >
                     </v-img>
                     <v-btn color="transparent" elevation="0" @click="closeDrawer">
-                        <v-icon icon="mdi-close" size="30"></v-icon>
+                        <v-icon icon="mdi:mdi-close" size="30"></v-icon>
                     </v-btn>
                 </div>
                 
