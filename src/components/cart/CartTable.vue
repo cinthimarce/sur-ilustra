@@ -16,9 +16,9 @@
                 <td class="text-center pr-16">{{ displayWithMarco(item.withFrame) }}</td>
                 <td class="">${{ item.total.toLocaleString("es-CL") }}</td>
                 <td transition="scale-transition">
-                    <v-icon class="mr-1" @click="subtractProduct(item.id, item.withFrame)">mdi-minus-circle</v-icon>
-                    <v-icon class="mr-1" @click="addProduct(item.id,item.withFrame)">mdi-plus-circle</v-icon>
-                    <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
+                    <v-icon class="mr-1" @click="subtractProduct(item.id, item.withFrame)">mdi:mdi-minus-circle</v-icon>
+                    <v-icon class="mr-1" @click="addProduct(item.id,item.withFrame)">mdi:mdi-plus-circle</v-icon>
+                    <v-icon @click="deleteItem(item)">mdi:mdi-delete</v-icon>
                 </td>
             </tr>
         </tbody>
@@ -39,15 +39,15 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="senary" variant="flat" @click="deleteItemConfirm">Aceptar
-                    <v-icon color="primary" size="25">mdi-check</v-icon></v-btn>
+                    <v-icon color="primary" size="25">mdi:mdi-check</v-icon></v-btn>
                 <v-btn color="senary" variant="flat" @click="closeDelete">Cancelar <v-icon color="primary"
-                        size="25">mdi-close</v-icon></v-btn>
+                        size="25">mdi:mdi-close</v-icon></v-btn>
                 <v-spacer></v-spacer>
             </v-card-actions>
         </v-card>
     </v-dialog>
     <v-card-actions class="justify-center">
-          <v-btn class="color-bg-cart px-6 mb-4 ml-1" variant="text" color="septenary"> Pagar </v-btn>
+        <v-btn class="color-bg-cart px-6 mb-4 ml-1" variant="text" color="septenary"> Pagar </v-btn>
         </v-card-actions>
 </template>
 

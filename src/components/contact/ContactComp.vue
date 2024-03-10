@@ -35,7 +35,7 @@ import CardContact from './CardContact.vue';
 
 <style scoped>
 h1 {
-    font-family: 'Hepta Slab', serif !important;
+    font-family: 'Caudex', serif !important;
     color: #8AA49B !important;
 }
 .font-contact{

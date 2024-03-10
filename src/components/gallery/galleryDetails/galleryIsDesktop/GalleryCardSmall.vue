@@ -1,6 +1,6 @@
-<template>
+<template >
     <v-card elevation="0" v-bind="props.props">
-        <v-img cover :src="props.src_image" class="border"></v-img>
+        <v-img cover :aspect-ratio="4/3" :src="props.src_image" class="border"></v-img>
         <v-overlay :model-value="props.isHovering" contained scrim="#036358" class="align-center justify-center"
             @click="changeImage">
         </v-overlay>

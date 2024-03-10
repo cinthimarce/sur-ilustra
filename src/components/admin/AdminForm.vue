@@ -130,19 +130,19 @@ const mostrarSnackbar = (texto, tipoAccion) => {
     switch (tipoAccion) {
         case 'creacion':
             color = 'green';
-            icon = 'mdi-check-circle';
+            icon = 'mdi:mdi-check-circle';
             break;
         case 'edicion':
             color = 'blue';
-            icon = 'mdi-refresh-circle';
+            icon = 'mdi:mdi-refresh-circle';
             break;
         case 'eliminacion':
             color = 'yellow';
-            icon = 'mdi-delete-circle';
+            icon = 'mdi:mdi-delete-circle';
             break
         default:
             color = 'red';
-            icon = 'mdi-alert-circle';
+            icon = 'mdi:mdi-alert-circle';
     }
 
     snackbarText.value = texto;
@@ -254,13 +254,13 @@ onUnmounted(() => {
                     <v-toolbar-title>Mis Productos</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
-                    <v-text-field v-model="search" prepend-inner-icon="mdi-magnify" density="compact" label="Search"
+                    <v-text-field v-model="search" prepend-inner-icon="mdi:mdi-magnify" density="compact" label="Search"
                         single-line flat hide-details variant="solo-filled"></v-text-field>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
                     <v-dialog v-model="dialog" max-width="800px">
                         <template v-slot:activator="{ props }">
-                            <v-btn color="black" dark prepend-icon="mdi-plus" class="mb-2" v-bind="props"
+                            <v-btn color="black" dark prepend-icon="mdi:mdi-plus" class="mb-2" v-bind="props"
                                 @click="mostrarFormulario">
                                 Nuevo Producto
                             </v-btn>
@@ -290,12 +290,12 @@ onUnmounted(() => {
                                                 :rules="[v => !!v || 'El precio del marco es obligatorio', v => /^\d+(\.\d{1,2})?$/.test(v) || 'El precio del marco debe ser un número válido']"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-file-input v-model="state.imagen1" prepend-icon="mdi-camera"
+                                            <v-file-input v-model="state.imagen1" prepend-icon="mdi:mdi-camera"
                                                 label="Primera Imagen"
                                                 :rules="[v => !!v || 'La primera imagen es obligatoria']"></v-file-input>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="6">
-                                            <v-file-input v-model="state.imagen2" prepend-icon="mdi-camera"
+                                            <v-file-input v-model="state.imagen2" prepend-icon="mdi:mdi-camera"
                                                 label="Segunda Imagen"
                                                 :rules="[v => !!v || 'La segunda imagen es obligatoria']"></v-file-input>
                                         </v-col>

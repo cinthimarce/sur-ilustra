@@ -1,16 +1,16 @@
 <template>
     <v-card-title class="text-h4 pt-2">
         <div class="color-picture ">
-            <h4  class="font-weight-light" elevation="0" :class="{ 'font-bold': !marcoAgregado }">
+            <h4  class="font-weight-light" elevation="0" >
                 {{ formatCurrency(precioDinamico) }}
             </h4>
         </div>
-        <v-card-text class="text-overline color-picture mt-2 pa-0" :class="{ 'font-bold': marcoAgregado }">
+        <v-card-text class="text-overline color-picture mt-2 pa-0 " :class="{ 'font-bold': marcoAgregado }">
             <div>{{ priceText }}</div>
         </v-card-text>
         <div class="ps-1 color-title text-overline font-weight-bold pb-1 pt-3">Agregar Marco</div>
         <v-btn-toggle group>
-            <v-btn color="septenary" variant="outlined" :outlined="!marcoAgregado" @click="toggleMarco">
+            <v-btn color="septenary font-weight-black" variant="outlined" :outlined="!marcoAgregado" @click="toggleMarco" >
                 {{ formatCurrency(priceMarco)}}
             </v-btn>
         </v-btn-toggle>
@@ -36,7 +36,7 @@ const toggleMarco = () => {
     color: #315467;
 }
 .font-bold {
-  font-weight: 700;
+  font-weight: 9s00;
   
 }
 </style>

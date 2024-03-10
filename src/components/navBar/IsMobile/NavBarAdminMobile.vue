@@ -5,7 +5,7 @@
                 <div class="d-flex justify-center">
 
                     <v-btn color="transparent" elevation="0" @click="toggleButton">
-                        <v-icon icon="mdi-close" size="30"></v-icon>
+                        <v-icon icon="mid:mdi-close" size="30"></v-icon>
                     </v-btn>
                 </div>
 
@@ -36,12 +36,12 @@
         <!-- NavBar Mobile Toolbar - MdiMenu navicon-->
         
             <div class="toolbar-items">
-                <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5" @click="toggleButton"><v-tooltip activator="parent" location="end">Menu</v-tooltip><v-icon icon="mdi-home" size="50"></v-icon></v-btn>
+                <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5" @click="toggleButton"><v-tooltip activator="parent" location="end">Menu</v-tooltip><v-icon icon="mdi:mdi-home" size="50"></v-icon></v-btn>
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
-                <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5"><v-tooltip activator="parent" location="end">Cuentas</v-tooltip><v-icon icon="mdi-account-key" size="50"></v-icon></v-btn>
+                <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5"><v-tooltip activator="parent" location="end">Cuentas</v-tooltip><v-icon icon="mdi:mdi-account-key" size="50"></v-icon></v-btn>
                 <v-spacer></v-spacer>
-                <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5"><v-tooltip activator="parent" location="end">Cerrar Sesión</v-tooltip><v-icon icon="mdi-exit-to-app" size="50" @click="logout"></v-icon></v-btn>
+                <v-btn rounded="xl" color="blue" size="60" class="my-5 mx-5"><v-tooltip activator="parent" location="end">Cerrar Sesión</v-tooltip><v-icon icon="mdi:mdi-exit-to-app" size="50" @click="logout"></v-icon></v-btn>
             </div>
             
         
