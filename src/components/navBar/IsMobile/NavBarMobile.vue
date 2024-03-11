@@ -3,7 +3,7 @@
         <v-navigation-drawer temporary location="left" absolute app v-model="drawer" color="duodenary">
             <v-layout class="mt-4 d-flex flex-column text-right">
                 <div class="d-flex justify-space-between">
-                    <v-img :src="props.logoOne" max-height="80" max-width="100" contain >
+                    <v-img :src="props.logoOne" max-height="80" max-width="100" contain>
                     </v-img>
                     <v-btn color="transparent" elevation="0" @click="closeDrawer">
                         <v-icon icon="mdi:mdi-close" size="30"></v-icon>
@@ -35,7 +35,7 @@
             <v-row class="d-flex justify-space-around pl-16">
                 <!-- <v-icon color="primary"> mdi-cart</v-icon> -->
                 <!-- <h3 class="logo-text pt-3">Humberto Vera</h3> -->
-                <v-img src="@/assets/banner/logowhite.png" max-height="50" max-width="100"  class=""></v-img>
+                <v-img src="@/assets/banner/logowhite.png" max-height="50" max-width="100" @click="redirectHome"></v-img>
             </v-row>
             <!-- <v-app-bar-title>Sur Ilustra</v-app-bar-title> -->
         </v-toolbar>
@@ -47,7 +47,9 @@
 
 
 import { ref, defineProps } from 'vue'
+import { useRouter } from 'vue-router';
 
+const route = useRouter()
 const drawer = ref(false)
 const props =defineProps({
     itemsNav: Object,
@@ -70,6 +72,9 @@ const closeDrawer = () => {
     drawer.value = false
 }
 
+const redirectHome = () =>{
+    route.push({name:'home'})
+}
 
 
 </script>
