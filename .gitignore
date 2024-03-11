@@ -6,7 +6,7 @@ node_modules
 # que debe ocupar solo otros desarrolladores 
 
 
-firebaseConfigExample.js
+#firebaseConfigExample.js
 
 # local env files
 .env.local

@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
-import { firebaseConfig } from './firebase/firebaseConf'
+import { firebaseConfig } from './firebase/firebaseConfigExample'
 loadFonts()
 const auth = getAuth()
 const pinia = createPinia()
