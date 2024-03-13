@@ -27,7 +27,7 @@ const icons = [
     },
     {
         name: 'mdi:mdi-instagram',
-        to: 'https://www.instagram.com/enmarcaysen/',
+        to: 'https://www.instagram.com/humberto.ilustra/',
 
     },
 
