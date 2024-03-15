@@ -8,7 +8,6 @@ const props = defineProps({
     actions:String
 })
 
-
 // Computed Properties
 const cardText = computed(() =>{
     switch (props.actions) {

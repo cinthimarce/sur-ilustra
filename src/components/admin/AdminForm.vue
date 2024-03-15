@@ -144,7 +144,6 @@ const mostrarSnackbar = (texto, tipoAccion) => {
             color = 'red';
             icon = 'mdi:mdi-alert-circle';
     }
-
     snackbarText.value = texto;
     snackbarColor.value = color;
     snackbaricon.value = icon;
@@ -192,7 +191,6 @@ const enviarFormulario = async () => {
         }
         if (editedIndex.value === -1) {
             crearProducto()
-
             //console.log('Producto enviado con exito');
         } else {
             editarProducto()
@@ -202,8 +200,6 @@ const enviarFormulario = async () => {
         mostrarSnackbar('Error al enviar el formulario', 'error');
     } 
     close()
-
-
 };
 
 // Funciones para eliminar Productos
@@ -313,7 +309,6 @@ onUnmounted(() => {
                                     </v-row>
                                 </v-container>
                             </v-card-text>
-
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn color="blue-darken-1" variant="text" @click="close">
@@ -346,10 +341,10 @@ onUnmounted(() => {
             </template>
             <template v-slot:item.actions="{ item }">
                 <v-icon size="small" color="blue" class="me-2" @click="editarFormulario(item)">
-                    mdi-pencil
+                    mdi:mdi-pencil
                 </v-icon>
                 <v-icon size="small" color="red" @click="deleteItem(item)">
-                    mdi-delete
+                    mdi:mdi-delete
                 </v-icon>
             </template>
         </v-data-table>
@@ -367,7 +362,6 @@ onUnmounted(() => {
     margin-top: 30px;
     padding: 20px;
 }
-
 .user {
     color: aqua;
 }</style>
