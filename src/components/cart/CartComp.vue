@@ -13,7 +13,15 @@
 <script setup>
 import CartTitle from "./CartTitle.vue"
 import CartTable from "./CartTable.vue";
+import { useCartStore } from "@/stores/cart";
+import {onUpdated} from 'vue'
 
+
+onUpdated(() => {
+    const cartStore = useCartStore()
+    const cart = cartStore.getCartList
+    console.log(cart);
+})
 
 </script>
 
