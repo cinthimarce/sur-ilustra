@@ -41,8 +41,7 @@ export const useGaleriaStore = defineStore("galeria", {
     // Obtener los Productos desde la base de datos
     async getProductos() {
       try {
-        // Limpiar los datos antiguos
-        //this.productos = [];
+        
         // Limpiar los datos antiguos
         this.productos = {
           ilustraciones: [],
