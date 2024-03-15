@@ -42,7 +42,7 @@ const itemsNav = [
         to: "/esculturas",
     }, */
     {
-        name: "Sobre",
+        name: "Sobre mi",
         icon: "mdi:mdi-information",
         to: "/about",
     },

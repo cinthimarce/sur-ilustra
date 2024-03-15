@@ -23,12 +23,10 @@ const icons = [
     {
         name: 'fa-brands fa-etsy',
         to: 'https://www.etsy.com/es/',
-
     },
     {
         name: 'mdi:mdi-instagram',
         to: 'https://www.instagram.com/humberto.ilustra/',
-
     },
 
 ]
