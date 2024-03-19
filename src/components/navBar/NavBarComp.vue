@@ -1,10 +1,10 @@
 <template>
     <div class="desktop d-md-none font-menu">
-        <NavBarMobile :itemsNav="itemsNav" :logoOne="logoOne" :LogoTwo="logoTwo" :logoThree="logoThree"/>
+        <NavBarMobile :itemsNav="itemsNavMobile" :logoOne="logoOne" :LogoTwo="logoTwo" :logoThree="logoThree"/>
     </div>
 
     <div class="d-none d-md-flex">
-        <NavBarDesktop :logo="logoOne" :itemsNav="itemsNav" />
+        <NavBarDesktop :logo="logoOne" :itemsNav="itemsNavDesktop" />
     </div>
 </template>
 
@@ -20,7 +20,7 @@ const logoThree = require('../../assets/banner/logoazul.png');
 
 
 
-const itemsNav = [
+const itemsNavMobile = [
     {
         name: "Inicio",
         icon: "mdi:mdi-home",
@@ -55,6 +55,38 @@ const itemsNav = [
         name: "Compras",
         icon: "mdi:mdi-shopping",
         to: "/cart",
+    },
+];
+const itemsNavDesktop = [
+    {
+        name: "Inicio",
+        icon: "mdi:mdi-home",
+        to: "/",
+    },
+    {
+        name: "Ilustraciones",
+        to: "/ilustraciones",
+        icon: "mdi:mdi-fountain-pen-tip",
+    },
+    {
+        name: "Avecillas",
+        icon: "mdi:mdi-bird",
+        to: "/avecillas",
+    },
+/*     {
+        name: "Escultura",
+        icon: "mdi:mdi-drawing",
+        to: "/esculturas",
+    }, */
+    {
+        name: "Sobre mi",
+        icon: "mdi:mdi-information",
+        to: "/about",
+    },
+    {
+        name: "Contacto",
+        icon: "mdi:mdi-phone",
+        to: "/contacto",
     },
 ];
 
